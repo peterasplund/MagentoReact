@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
+import Test from '../src/components/Test';
 
 render(
-  <div>react magento demo</div>,
+  <Test/>,
   document.getElementById('app')
 )
