@@ -1,6 +1,8 @@
-import { applyMiddleware, compose, createStore } from 'redux';
-import reducer from './modules/reducer';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import logger from 'redux-logger';
+import { Router, Route, browserHistory } from 'react-router';
+
+import reducer from './modules/reducer';
 
 let finalCreateStore = compose(
   applyMiddleware(logger()),
@@ -8,5 +10,7 @@ let finalCreateStore = compose(
 )(createStore);
 
 export default function configureStore(initialState = {}) {
-  return finalCreateStore(reducer, initialState);
+return finalCreateStore(
+  reducer,
+  initialState);
 }
