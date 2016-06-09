@@ -4,8 +4,9 @@ import configureStore from '../src/redux/store';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { Router } from 'react-router';
 import ApiClient from '../src/helpers/ApiClient';
-import Routes from '../src/routes';
+import getRoutes from '../src/routes';
 
 const client = new ApiClient();
 const store = configureStore(browserHistory, client);
@@ -14,7 +15,9 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={store}>
-    <Routes history={history} />
+    <Router history={history}>
+      {getRoutes(store)}
+    </Router>
   </Provider>,
   document.getElementById('app')
 )

@@ -4,7 +4,7 @@ import superagent from 'superagent';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 // const apiHost = __DEVELOPMENT__ ? config.apiHost.local : config.apiHost.live;
-const apiHost = 'http://amex-nok.local';
+const apiHost = 'http://magento.local/';
 
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
@@ -39,7 +39,7 @@ export default class ApiClient {
           request.send(data);
         }
 
-        request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
+        request.withCredentials().end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
       }));
   }
   empty() {}

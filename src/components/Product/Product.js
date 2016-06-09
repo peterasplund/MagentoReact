@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import numeral from 'numeral';
+
+import { add as addToCart } from '../../redux/modules/cart';
 
 numeral.languageData().delimiters.thousands = ' ';
 numeral.languageData().delimiters.decimal = ',';
@@ -17,10 +19,25 @@ const blockStyle = {
   textAlign: 'center'
 };
 
+
+@connect(
+  state => ({}), { addToCart }
+)
 export default class extends Component {
   
   static propTypes = {
-    data: React.PropTypes.object
+    data: React.PropTypes.object,
+    addToCart: React.PropTypes.func
+  }
+
+  addToCart(product, e) {
+    e.preventDefault();
+    console.log(product);
+    this.props.addToCart(product, this.refs.qty.value).then(response => {
+
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   render() {
@@ -36,8 +53,8 @@ export default class extends Component {
         <span style={{color: 'red'}}>{numeral(data.price).format() + ' kr'}</span>
         <br />
         <br />
-        <input defaultValue="1" name="qty" />
-        <button>Köp</button>
+        <input defaultValue="1" name="qty" ref="qty" />
+        <button onClick={this.addToCart.bind(this, data.id)}>Köp</button>
 
       </form>
     );
