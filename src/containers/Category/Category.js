@@ -16,17 +16,17 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    this.props.load();
+    this.props.load(this.props.params.slug);
   }
 
   render() {
     const { category } = this.props;
-    if (typeof category === 'undefined') {
+    if (category.loading) {
       return <div>Laddar</div>;
     }
     return (
       <div>
-        <h1>Kategori {this.props.params.id}</h1>
+        <h1>Kategori {this.props.params.slug}</h1>
 
         <ProductList products={category.products} />
 

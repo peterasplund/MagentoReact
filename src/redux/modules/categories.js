@@ -1,12 +1,12 @@
-const LOAD = 'magentoreact/category/LOAD';
-const LOAD_SUCCESS = 'magentoreact/category/LOAD_SUCCESS';
-const LOAD_FAIL = 'magentoreact/category/LOAD_FAIL';
+const LOAD = 'magentoreact/categories/LOAD';
+const LOAD_SUCCESS = 'magentoreact/categories/LOAD_SUCCESS';
+const LOAD_FAIL = 'magentoreact/categories/LOAD_FAIL';
 
 const initialState = {
   loading: false,
   loaded: false,
-  products: []
-};
+  data: []
+}
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -16,11 +16,11 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-      return {
+    return {
         ...state,
         loading: false,
         loaded: true,
-        products: action.result,
+        data: action.result
       };
     case LOAD_FAIL:
       return {
@@ -33,9 +33,9 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-export function load(slug) {
+export function load(id) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('Category/getProducts/s/' + slug)
+    promise: (client) => client.get('Category/getCategories')
   };
 }

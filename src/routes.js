@@ -9,7 +9,7 @@ class Routes extends Component {
     return (
       <Router history={this.props.history}>
         <Route path="/" component={Home} />
-        <Route path="/category/:id" component={Category} />
+        <Route path="/category/:slug" component={Category} />
         <Route path="/checkout" component={Checkout} />
       </Router>
     );
