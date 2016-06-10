@@ -13,7 +13,7 @@ export default class extends Component {
 
   static propTypes = {
     categories: React.PropTypes.object,
-    children: React.PropTypes.object.isRequired
+    children: React.PropTypes.object
   }
 
   componentDidMount() {

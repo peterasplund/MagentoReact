@@ -32,7 +32,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: true,
-        data: action.result
+        data: action.result.data
       };
     case LOAD_FAIL:
       return {
@@ -51,14 +51,12 @@ export default function reducer(state = initialState, action = {}) {
     return {
         ...state,
         loading: false,
-        loaded: true,
-        data: action.result
+        data: action.result.data
       };
     case ADD_FAIL:
       return {
         ...state,
         loading: false,
-        loaded: false,
       }
 
 
@@ -71,14 +69,12 @@ export default function reducer(state = initialState, action = {}) {
     return {
         ...state,
         loading: false,
-        loaded: true,
-        data: action.result
+        data: action.result.data
       };
     case REMOVE_FAIL:
       return {
         ...state,
         loading: false,
-        loaded: false,
       }
 
 

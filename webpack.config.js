@@ -1,7 +1,8 @@
 var webpack = require('webpack');
 
 module.exports = {
-entry: [
+  devtool: 'source-map',
+  entry: [
     'webpack-hot-middleware/client',
     './client/client.js'
   ],

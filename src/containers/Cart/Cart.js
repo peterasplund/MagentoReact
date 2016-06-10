@@ -26,22 +26,23 @@ export default class extends Component {
     this.props.load();
   }
 
-  renderBody() {
+  getProductCount(items) {
+    return items.reduce((x, y) => x.qty + y.qty);
+  }
+
+  renderBody(items) {
     const { cart } = this.props;
 
-    if (!cart.loaded || !cart.data || !cart.open) {
-      return <div />;
-    }
     return (
       <div>
-        {cart.data.data.items.map((x, i) => {
+        {items.map((x, i) => {
           return (
             <div key={i}>
             {x.name} x {x.qty} - <span style={{color: 'red'}}>{numeral(x.price).format()} kr</span>
             </div>
           );
         })}
-        <span>Total: {numeral(cart.data.data.summary.grand_total).format()} kr</span>
+        <span>Total: {numeral(cart.data.summary.grand_total).format()} kr</span>
       </div>
     );
   }
@@ -51,20 +52,10 @@ export default class extends Component {
     if (!cart.loaded) {
       return <div />;
     }
-
-    if (!cart.data) {
-      return <div />;
-    }
-    if (!cart.data.data) {
-      return <div />;
-    }
-    if (!cart.data.data.items) {
-      return <div />;
-    }
     return (
       <div>
-        <h3 onClick={this.props.toggle} style={{cursor: 'pointer'}}>Varukorg ({cart.data.data.items.reduce((x,y) => x.qty + y.qty)})</h3>
-        {this.renderBody()}
+        <h3 onClick={this.props.toggle} style={{cursor: 'pointer'}}>Varukorg ({this.getProductCount(cart.data.items)})</h3>
+        { (cart.open) ? this.renderBody(cart.data.items) : <div /> }
       </div>
     );
   }
