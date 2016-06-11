@@ -1,0 +1,137 @@
+// ===========
+//  VARIABLES
+// ===========
+
+$site: (
+  "font": (
+    "size":                14px,
+    "size--small":         .85em,
+    "size--large":         1.2em,
+    "size--larger":        1.8em,
+    "line-height":         1.4,
+    "line-height--header": 1.1,
+
+    "color--muted": #777,
+    "color":        color("font"),
+    "color--dark":  color("font", 15%),
+
+    "body":     "Open sans",
+    "header":   "Open sans",
+    "fallback": sans-serif
+  ),
+
+  "breakpoints": (
+    "mini":   420px,
+    "tiny":   500px,
+    "small":  830px,
+    "medium": 986px,
+    "large":  1206px
+  ),
+
+  "sizes": (
+    "gutter":          gr(1),
+    "content":         1226px,
+    "content--small":  650px,
+    "text-block":      30em,
+    "typography":      80ex,
+    "spinner":         1.3em,
+    "br":              3px,
+    "hr":              20em,
+    "input":           gr(2),
+
+    "header":          8em,
+    "header--compact": 5em,
+    "header--small":   50px,
+
+    "burger--height":  4px,
+    "burger--width":   2em,
+    "burger--spacing": 1,
+
+    "list-item--gutter": 20px,
+
+    "button--padding": 1em
+  ),
+
+  "colors": (
+    "primary":        #EC982D,
+    "secondary":      #6C7478,
+
+    "navbar":         #5F5F5F,
+    "sidebar":        #202C32,
+    "sidebar--muted": #3A4851,
+
+    "positive":       #AAB92C,
+    "negative":       #A7442C,
+
+    "font":           #434343,
+
+    "border":         #666,
+    "border--muted":  #ccc,
+    "border--dark":   #555,
+    "border--heavy":  #111,
+
+    "background":     #FAFAFA,
+
+    "average":        #6C7477
+  ),
+
+  "box-shadow": bottom-shadow(1),
+  "blur":       8px
+);
+
+@function site($value) {
+  @return map-get($site, $value);
+}
+
+@function breakpoints($value) {
+  @return map-deep-get($site, "breakpoints", $value);
+}
+
+@function font($value) {
+  @return map-deep-get($site, "font", $value);
+}
+
+@function size($value) {
+  @return map-deep-get($site, "sizes", $value);
+}
+
+// grid:
+$susy: (
+  columns: 12,
+  gutters: .08
+);
+
+
+// z-index:
+$z-index: (
+  "overlay": 900,
+  "system":  500,
+  "popup":   100
+);
+
+@function z($value) {
+  @return map-get($z-index, $value);
+}
+
+
+// transitions:
+$transition: (
+  "duration":        250ms,
+  "duration--short": 100ms,
+  "duration--long":  500ms,
+
+  "sticky":            cubic-bezier(.6, .06,  .3,  1),
+  "elastic":           cubic-bezier(.15, 1.4, .2,  1),
+  "elastic--bounce":   cubic-bezier(.33, 1.3, .66, 1),
+  "swift-out":         cubic-bezier(.55, 0,   .1,  1),
+  "swift-out--bounce": cubic-bezier(.55, 0,   .1,  1.3),
+  "swift-in":          cubic-bezier(.1,  1,   .55, 1),
+  "swift-in--bounce":  cubic-bezier(.1,  1.3, .55, 1)
+);
+
+@function transition($value) {
+  @return map-get($transition, $value);
+}
+
+$navbar-height: 50px;
+$sidebar-width: 230px;

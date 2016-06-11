@@ -1,0 +1,34 @@
+$color: #212121;
+$width: 250px;
+
+.container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  z-index: 100;
+}
+
+.message {
+  padding: 1.5em 1.5em;
+  background: $color;
+  color: #fff;
+
+  width: $width;
+  margin: 0 auto;
+
+  text-align: center;
+
+
+  &:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+  }
+}
+.error {
+  background: color("negative");
+}
+.success {
+  background: color("positive");
+}

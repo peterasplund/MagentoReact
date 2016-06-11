@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import numeral from 'numeral';
 
 import { add as addToCart } from '../../redux/modules/cart';
+import { add as addMessage } from '../../redux/modules/messages';
 
 numeral.languageData().delimiters.thousands = ' ';
 numeral.languageData().delimiters.decimal = ',';
@@ -21,22 +22,24 @@ const blockStyle = {
 
 
 @connect(
-  state => ({}), { addToCart }
+  state => ({}), { addToCart, addMessage }
 )
 export default class extends Component {
   
   static propTypes = {
     data: React.PropTypes.object,
-    addToCart: React.PropTypes.func
+    addToCart: React.PropTypes.func,
+    addMessage: React.PropTypes.func
   }
 
   addToCart(product, e) {
     e.preventDefault();
-    console.log(product);
-    this.props.addToCart(product, this.refs.qty.value).then(response => {
 
+    this.props.addToCart(product, this.refs.qty.value).then(response => {
+      this.props.addMessage('success', response.message);
     }).catch(err => {
       console.log(err);
+      this.props.addMessage('error', 'Ett fel inträffade. Försök igen senare.');
     });
   }
 

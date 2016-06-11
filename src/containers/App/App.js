@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { Cart } from '../';
+import { Cart, Messages } from '../';
 
 import { load } from '../../redux/modules/categories';
 
 @connect(
   state => ({categories: state.categories}), { load }
 )
+
 export default class extends Component {
 
   static propTypes = {
@@ -38,6 +39,8 @@ export default class extends Component {
         <div>
           {this.props.children}
         </div>
+        
+        { /*<Messages />*/ }
       </div>
     );
   }

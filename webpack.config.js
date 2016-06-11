@@ -4,7 +4,8 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './client/client.js'
+    './client/client.js',
+    './src/styles/base.scss'
   ],
   output: {
     path: require("path").resolve("./dist"), 
@@ -13,16 +14,19 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin() 
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'babel', // this can be a list of loaders separated by "!". It chains right to left
         exclude: '/node_modules/'
       },
+      {
+        test: /\.scss$/,
+        loader: 'style!css',
+      }
     ]
   }
 }
