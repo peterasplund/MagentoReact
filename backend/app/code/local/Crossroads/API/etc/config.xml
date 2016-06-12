@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <API>
+            <version>1.0.0</version>
+        </API>
+    </modules>
+    <global>
+        <helpers>
+            <API>
+                <class>Crossroads_API_Helper</class>
+            </API>
+        </helpers>
+        <sales>
+            <quote>
+                <item>
+                    <product_attributes>
+                        <!-- extra attributes to be accessed in cart quote -->
+                        <manufacturer />
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+    </global>
+    <frontend>
+        <routers>
+            <API>
+                <use>standard</use>
+                <args>
+                    <module>Crossroads_API</module>
+                    <frontName>API</frontName>
+                </args>
+            </API>
+        </routers>
+    </frontend>
+
+</config>
