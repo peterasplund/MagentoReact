@@ -1,0 +1,17 @@
+version: '2'
+services:
+  web:
+    image: alexcheng/magento:1.9.1.0
+    ports:
+      - "80:80"
+    links:
+      - mysql
+    env_file:
+      - env
+    volumes:
+      - ./files/app/code/local/Crossroads/API:/var/www/htdocs/app/code/local/Crossroads/API
+      - ./files/app/etc/modules/Crossroads_API.xml:/var/www/htdocs/app/etc/modules/Crossroads_API.xml
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - env
