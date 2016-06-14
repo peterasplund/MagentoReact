@@ -26,10 +26,6 @@ export default class extends Component {
     this.props.load();
   }
 
-  getProductCount(items) {
-    return items.reduce((x, y) => x.qty + y.qty);
-  }
-
   renderBody(items) {
     const { cart } = this.props;
 
@@ -49,12 +45,12 @@ export default class extends Component {
 
   render() {
     const { cart } = this.props;
-    if (!cart.loaded) {
+    if (!cart.loaded || !cart.data) {
       return <div />;
     }
     return (
       <div>
-        <h3 onClick={this.props.toggle} style={{cursor: 'pointer'}}>Varukorg ({this.getProductCount(cart.data.items)})</h3>
+        <h3 onClick={this.props.toggle} style={{cursor: 'pointer'}}>Varukorg ({cart.data.summary.qty})</h3>
         { (cart.open) ? this.renderBody(cart.data.items) : <div /> }
       </div>
     );

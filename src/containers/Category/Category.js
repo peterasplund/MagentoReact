@@ -15,8 +15,14 @@ export default class extends Component {
     load: React.PropTypes.func
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.load(this.props.params.slug);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.slug !== this.props.params.slug) {
+      this.props.load(nextProps.params.slug);
+    }
   }
 
   render() {
