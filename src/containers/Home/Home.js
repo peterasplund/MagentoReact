@@ -6,9 +6,8 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <h1>Hem</h1>
-        <Link to="/checkout">Till kassan</Link>
-        </div>
+        <h1>Home</h1>
+      </div>
     );
   }
 

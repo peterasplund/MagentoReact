@@ -6,6 +6,8 @@ import { Link } from 'react-router';
 import { ProductList } from '../../components/';
 import { load, add, remove, toggle } from '../../redux/modules/cart';
 
+const style = require('./Cart.scss');
+
 numeral.languageData().delimiters.thousands = ' ';
 numeral.languageData().delimiters.decimal = ',';
 
@@ -30,7 +32,7 @@ export default class extends Component {
     const { cart } = this.props;
 
     return (
-      <div>
+      <div className={style.body}>
         {items.map((x, i) => {
           return (
             <div key={i}>
@@ -38,7 +40,12 @@ export default class extends Component {
             </div>
           );
         })}
-        <span>Total: {numeral(cart.data.summary.grand_total).format()} kr</span>
+        <div className={style.totals}>
+          <span>Total: {numeral(cart.data.summary.grand_total).format()} kr</span>
+        </div>
+        {items.length &&
+          <Link to="/checkout">Checkout</Link>
+        }
       </div>
     );
   }
@@ -49,8 +56,8 @@ export default class extends Component {
       return <div />;
     }
     return (
-      <div>
-        <h3 onClick={this.props.toggle} style={{cursor: 'pointer'}}>Varukorg ({cart.data.summary.qty})</h3>
+      <div className={style.block}>
+        <span className={style.heading} onClick={this.props.toggle}>Cart ({cart.data.summary.qty})</span>
         { (cart.open) ? this.renderBody(cart.data.items) : <div /> }
       </div>
     );

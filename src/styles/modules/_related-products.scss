@@ -1,0 +1,25 @@
+// ==================
+//  RELATED PRODUCTS
+// ==================
+
+/*
+  [*] A couple of differences between product lists and lists of
+      related products.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "related-products";
+
+// ----------------
+
+
+.#{$block} {
+  &__list {
+    @include mq("medium") {
+      margin-left: -#{size("list-item--gutter")};
+    }
+  }
+}

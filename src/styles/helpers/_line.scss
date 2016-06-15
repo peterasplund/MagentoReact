@@ -1,0 +1,48 @@
+// ================
+//  LINE COMPONENT
+// ================
+
+/*
+  [*] Generic layout class name used for lines of content.
+
+  [1] Essentially don't float this so that it can use other .line__classes and
+      be centered with text-align.
+
+  [2] It makes sense to remove the float here since we can then use the regular
+      block class name for external combinations.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "line";
+
+  $block-padding: size("gutter");
+
+// ----------------
+
+@if (config("lineComponents")) {
+  .#{$block} {
+    @extend %clearfix;
+
+    &__item {
+      float: left;
+
+      &--omega {
+        float: right;
+      }
+
+      &--center {
+        display: inline-block; /* [1] */
+        float: none; /* [2] */
+      }
+
+      &--padded {
+        & + & {
+          margin-left: $block-padding;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+// ============
+//  TYPOGRAPHY
+// ============
+
+/*
+  [*] This document should contain all base typography rules and helpers.
+
+  [1] It's more common (citation needed) to use unordered list for layout
+      purposes rather than typographical purposes, so we reset it globally.
+
+  [2] Apply this class name to remove gutters between the current element and
+      the next. The most likely use case is for header + paragraph.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "typography";
+
+// ----------------
+
+
+@include headings(6) {
+  @include vertical-margins;
+  font: 700 #{1em}/#{font("line-height--header")} font("header"), font("fallback");
+  color: color("font");
+}
+
+
+// silent classes:
+// ---------------
+
+  %text-block-anchor {
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+
+    &:focus,
+    &:hover {
+      border-bottom-color: color("accent");
+    }
+
+    &:active {
+      opacity: .5;
+      border-bottom: 1px dotted currentColor;
+    }
+  }
+
+  %text-block {
+    @extend %vertical-margins--small;
+    line-height: font("line-height");
+
+    a {
+      // @extend %text-block-anchor;
+    }
+  }
+
+  %text--compact {
+    margin: size("gutter") 0 0;
+
+    + p {
+      margin-top: (font("line-height") - 1em) / 2;
+    }
+  }
+
+  %anchor {
+    color: color("primary");
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      color: color("primary", 15%);
+    }
+  }
+
+// ----------------
+
+
+
+p {
+  @extend %text-block;
+}
+
+@include headings(5, 3) {
+  @extend %text--compact;
+  font-size: font("size--large");
+}
+
+h6 {
+  @extend %text--compact;
+  line-height: font("line-height");
+}
+
+%primary-heading--size {
+  font-size: 1.2em;
+  line-height: 1;
+
+  @include mq("mini") {
+    font-size: gr(1);
+  }
+}
+
+%secondary-heading--size {
+  font-size: 1.2em;
+}
+
+h1 {
+  @extend %primary-heading--size;
+  margin-bottom: gr(-1);
+  font-weight: 200;
+}
+
+h2 {
+  @extend %secondary-heading--size;
+  font-weight: 200;
+}
+
+ul {
+  @extend %reset-list; /* [1] */
+}
+
+address {
+  @extend %text-block;
+}
+
+.#{$block} {
+  ul {
+    @extend %text-block;
+    list-style: inside;
+  }
+
+  h6 {
+    color: color("primary");
+  }
+}

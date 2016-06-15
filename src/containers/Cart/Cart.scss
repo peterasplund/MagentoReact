@@ -1,0 +1,34 @@
+@import "../../styles/import";
+
+.block {
+  display: inline-block;
+}
+
+.heading {
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+
+  border-left: 1px solid #666;
+  padding-left: 1.7em;
+}
+
+.body {
+  position: absolute;
+  background: #fff;
+  padding: 1em 2em .5em 2em;
+  width: 250px;
+
+  top: 2em;
+  right: 0;
+
+  border: 1px solid #ccc;
+
+  z-index: z("popup");
+}
+
+.totals {
+  border-top: 1px solid #eee;
+  padding-top: 0.7em;
+  margin: 0.7em 0;
+}

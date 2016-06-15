@@ -1,0 +1,109 @@
+// ===============
+//  MEDIA QUERIES
+// ===============
+
+////
+/// @group Media queries
+/// @author Nils Kaspersson
+////
+
+
+// breakpoints:
+// ------------
+
+/// Checks if passed `$size` is a keyword for a predefined breakpoint, then subtracts `1px` from the breakpoint if it's a max-length query to avoid scenarios where min- and max- queries overlap.
+///
+/// @param $size - The desired breakpoint. Must be a pixel value or max-length cannot be adjusted properly. If passed value is a key in the `breakpoints` map then it's fetched and used.
+/// @param $direction [null] - The direction for which the breakpoint is supposed to be used.
+
+@function breakpoint($size, $direction: null) {
+  $value: if-map(site("breakpoints"), $size, $size);
+
+  @if $direction == max-width or $direction == max-height {
+    $value: $value - 1px;
+  }
+
+  @return $value;
+}
+
+
+
+// media queries:
+// --------------
+
+/// The primary media query mixin!
+///
+/// Available breakpoints are:
+/// * tiny
+/// * small
+/// * medium
+/// * large
+///
+/// If both `$breakpoint` and `$breakpoint2` are passed, a media query spanning between two directions is generated. Use the keyword `to` as the first `$direction` as a more semantic way to express the typical min-to-max-width media query.
+///
+/// @param $breakpoint - A pixel value or key from the `breakpoints` map.
+/// @param $direction [min-width] - A media query direction; `min-width`, `max-width`, `min-height` or `max-height`.
+/// @param $breakpoint2 [null] - A second pixel value or key from the `breakpoints` map.
+/// @param $direction2 [max-width] - A second media query direction; `min-width`, `max-width`, `min-height` or `max-height`.
+///
+/// @example scss
+/// .element {
+///   @include mq(small, to, 1000px) {
+///     property: value;
+///   }
+/// }
+///
+/// @example css
+/// /* Generated CSS: */
+///  @media (min-width: 600px) and (max-width: 1000px) {
+///   .element {
+///     property: value;
+///   }
+/// }
+
+@mixin mq($breakpoint, $direction: min-width, $breakpoint2: null, $direction2: max-width, $combinator: "and") {
+
+  $break: breakpoint($breakpoint, $direction);
+
+  @if $direction == to {
+    $direction:  min-width;
+    $direction2: max-width;
+  }
+
+  @if $breakpoint2 == null {
+    @media ($direction: $break) {
+      @content;
+    }
+  }
+
+  @else {
+    $break2: breakpoint($breakpoint2, $direction2);
+
+    @if $combinator == "or" {
+      @media ($direction: $break), ($direction2: $break2) {
+        @content;
+      }
+    }
+
+    @else {
+      @media ($direction: $break) and ($direction2: $break2) {
+        @content;
+      }
+    }
+  }
+}
+
+
+@each $size, $breakpoint in site("breakpoints") {
+  %hide-above--#{$size} {
+    @include mq($size) {
+      display: none !important;
+    }
+  }
+
+  %hide-below--#{$size} {
+    @include mq($size, max-width) {
+      display: none !important;
+    }
+  }
+}

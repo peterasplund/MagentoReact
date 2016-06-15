@@ -1,0 +1,95 @@
+// ========
+//  KLARNA
+// ========
+
+/*
+  [*] Yup. That's right. They get their own document. Guess why. 💁
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "klarna";
+
+// ----------------
+
+.#{$block} {
+  &_box_container {
+    .input_row {
+      @extend %vertical-margins--mini;
+    }
+
+    .input_notice {
+      line-height: font("line-height");
+
+      > span {
+        &:after {
+          content: " *";
+          color: color("negative");
+        }
+      }
+    }
+  }
+
+  &_text {
+    @extend %text-input;
+    width: 100%;
+    border: 1px solid color("border");
+    border-radius: size("br");
+  }
+
+  &_box_top_right {
+    display: none;
+  }
+
+  &_box_top_agreement {
+    margin-bottom: size("gutter");
+  }
+
+  &-link {
+    font-size: 1em;
+    color: color("primary");
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+
+    &:focus:not(:active),
+    &:hover {
+      border-bottom-color: color("primary");
+    }
+
+    &:active {
+      opacity: .5;
+      border-bottom-style: dotted;
+    }
+  }
+
+  &_error {
+    border-radius: size("br");
+    color: #fff;
+    background: color("secondary");
+    padding: 1em;
+    margin-top: 1em;
+    line-height: font("line-height");
+    font-size: font("size--small");
+    z-index: 1;
+    @include position(absolute, 100%, 0, null);
+  }
+
+  &_additional_information {
+    margin-top: gr(-1);
+
+    p {
+      text-align: center;
+      padding: gr(-1);
+      font-weight: 500;
+      color: #fff;
+      background: color("secondary");
+      border-radius: size("br");
+    }
+  }
+}
+
+.error_hook {
+  position: static;
+}

@@ -1,0 +1,29 @@
+// ==========
+//  MESSAGES
+// ==========
+
+/*
+  [*] Styles for the Magento "global messsages"
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "messages";
+
+// ----------------
+
+
+.#{$block} {
+  @extend %notifications;
+
+  > li > ul {
+    @extend %notifications__list;
+
+    > li {
+      @extend %notifications__item;
+      background: color("positive");
+    }
+  }
+}

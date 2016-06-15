@@ -1,0 +1,66 @@
+// =======
+//  MEDIA
+// =======
+
+/*
+  [*] A component for simple vertical media + text layout. The structure is
+      `media` > `media__item` + `media__body`. Use `media__item--omega` for a
+      right-aligned media element.
+
+  [1] `overflow: hidden` on the parent clears the float of the item, and creates
+      a block formatting context for the sibling which prevents it from wrapping
+      around floats.
+
+  [2] Some browsers likes to cut off the last pixel row of elements inside of
+      elements with overflow: hidden. A quick and dirty "fix" is to apply a
+      small bottom padding.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "media";
+
+  $media-gutter: 1em;
+
+// ----------------
+
+
+@if (config("mediaElement")) {
+  .#{$block} {
+    overflow: hidden; /* [1] */
+
+    &__body {
+      overflow: hidden;
+
+      &--fix {
+        padding-bottom: 1px; /* [2] */
+      }
+    }
+
+    &__item {
+      float: left;
+      margin-right: $media-gutter;
+
+      &--omega {
+        float: right;
+        margin-left: $media-gutter;
+      }
+    }
+
+    &--medium {
+      @include mq("medium", max-width) {
+        > .#{$block}__item {
+          float: none;
+          margin-right: 0;
+        }
+
+        > .#{$block}__item--omega {
+          float: none;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

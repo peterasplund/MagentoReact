@@ -1,0 +1,86 @@
+// ===============
+//  CART QUANTITY
+// ===============
+
+/*
+  [*] Styles for the quantity in cart tables
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "cart-qty";
+
+  $quantity-height: 2em;
+  $arrow-length: .8em;
+
+// ----------------
+
+
+.#{$block} {
+  @extend %flex;
+  white-space: nowrap;
+
+  &__value {
+    display: inline-block;
+    padding: .5em 0;
+    border: 1px solid color("border");
+    border-radius: size("br");
+    min-width: gr(3);
+    margin: 0 gr(-2);
+    height: $quantity-height;
+  }
+
+  &__button {
+    display: inline-block;
+    border: 1px solid color("border");
+    border-radius: size("br");
+    padding: gr(-2);
+    color: color("primary");
+    height: $quantity-height;
+
+    &:focus,
+    &:hover {
+      border-color: color("primary");
+    }
+
+    &:active:hover:not([disabled]) {
+      opacity: .5;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      border-color: color("border");
+      color: font("color--muted");
+    }
+  }
+
+  &__save {
+    margin-top: $arrow-length;
+    font-size: 1em;
+    width: 100%;
+    z-index: 1;
+    @include position(absolute, 100%, 0, null);
+
+    &:before {
+      @extend %transition;
+      left: 50%;
+      margin-left: -$arrow-length;
+      @include arrow(top, $arrow-length, color("positive"));
+    }
+
+    &:hover,
+    &:focus {
+      &:before {
+        border-bottom-color: color("positive", 10%);
+      }
+    }
+
+    &:active:hover {
+      &:before {
+        border-bottom-color: color("positive");
+      }
+    }
+  }
+}

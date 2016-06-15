@@ -1,0 +1,47 @@
+// =====
+//  ROW
+// =====
+
+/*
+  [*] Generic layout class name used for row spacing.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "row";
+
+// ----------------
+
+
+@if (config("includeRows")) {
+  .row {
+    @extend %vertical-margins;
+
+    &--mini {
+      @extend %vertical-margins--mini;
+    }
+
+    &--small {
+      @extend %vertical-margins--small;
+    }
+
+    &--large {
+      @extend %vertical-margins--large;
+    }
+
+    &--huge {
+      @extend %vertical-margins--large;
+    }
+
+    &--center {
+      @extend %flex;
+      @extend %align-items-center;
+    }
+
+    &--inline {
+      display: inline-block;
+    }
+  }
+}

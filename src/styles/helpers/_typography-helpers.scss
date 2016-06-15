@@ -1,0 +1,91 @@
+// ====================
+//  TYPOGRAPHY HELPERS
+// ====================
+
+/*
+  [*] Various typography helpers.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "text";
+
+// ----------------
+
+
+.#{$block} {
+  &--center { text-align: center; }
+  &--left   { text-align: left; }
+  &--right  { text-align: right; }
+
+  &--color { color: font("color"); }
+  &--muted { color: font("color--muted"); }
+  &--dark  { color: font("color--dark"); }
+
+  &--primary-color   { color: color("primary"); }
+  &--secondary-color { color: color("secondary"); }
+
+  &--positive { color: color("positive"); }
+  &--negative { color: color("negative"); }
+
+  &--light  { font-weight: 300; }
+  &--normal { font-weight: 400; }
+  &--medium { font-weight: 500; }
+  &--bold   { font-weight: 700; }
+  &--black  { font-weight: 800; }
+
+  &--italic { font-style: italic; }
+
+  &--small   { font-size: font("size--small"); }
+  &--regular { font-size: 1em !important; }
+  &--large   { font-size: font("size--large"); }
+
+  &--uppercase { text-transform: uppercase; }
+  &--nowrap    { white-space: nowrap; }
+
+  &--underline    { border-bottom: 1px solid color("border"); }
+  &--line-through { text-decoration: line-through; }
+
+  &--compact { /* [2] */
+    @extend %text--compact;
+  }
+
+  &--heading {
+    font-family: font("header");
+    font-weight: 700;
+  }
+
+  &--height {
+    line-height: font("line-height");
+  }
+
+  &--flat {
+    line-height: 1;
+    margin: 0;
+  }
+
+  &--no-margin {
+    margin: 0;
+  }
+
+  &__block {
+    @extend %text-block;
+  }
+
+  &--wrap {
+    max-width: size("content--small");
+  }
+
+  &__inline-block {
+    display: inline-block;
+  }
+
+  &--transparent {
+    opacity: .5;
+  }
+
+  &--h1 { @extend %primary-heading--size; }
+  &--h2 { @extend %secondary-heading--size; }
+}

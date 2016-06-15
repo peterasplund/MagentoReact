@@ -1,0 +1,186 @@
+// =======
+//  INPUT
+// =======
+
+/*
+  [*] Generic styles for "input" elements
+
+  [1] We get consistent rendering of text position in inputs, and prevents text
+      from being cut off in some environments, by using line-height instead of
+      padding for vertical gutters. This includes placeholder text as well,
+      which is normally inconsistent between font sizes even in the same engine.
+
+      Keep in mind that this doesn't work well for textareas so make sure that
+      they have an override.
+
+      UPDATE: Actually this isn't enough. The only way I know of atm is to set a
+      static height, which luckily works fairly well if we use em.
+
+  [2] Identify touch screens somehow and apply this class name to html or body.
+      We want this because iOS devices zoom in on focused inputs with font-size
+      lower than 16px.
+
+  [3] This is literally the only way to override the yellow background color
+      Chrome applies to autofilled input fields – overriding it with another
+      solid color.
+
+  [4] You can't toggle back and forth/click in a rapid succession without this
+      since the browser treats labels like regular text (which becomes selected
+      on double click).
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "input";
+
+  $disabled-color: rgba(color("font"), .5);
+  $input-bg: #fff;
+  $input-padding: 6px 12px;
+
+  %text-input {
+    @extend %reset-input;
+    @extend %transition;
+    @extend %reset-appearance;
+    transition-duration: transition("duration--short");
+    cursor: text;
+    padding: $input-padding;
+    height: 34px;
+    max-width: 100%;
+    background: $input-bg;
+    text-align: inherit;
+    font-weight: 300;
+    border: none;
+    color: color("font");
+    line-height: normal;
+
+    @media (max-width: breakpoints("small")) {
+      font-size: 16px;
+    }
+
+    .ie & {
+      line-height: 1;
+      padding: gr(-2) gr(-2) gr(-3);
+    }
+
+    &:focus {
+      z-index: 2;
+      border-color: color("primary", 50%);
+      color: color("font", -50%);
+    }
+
+    @if (strip-unit(font("size")) < 16) {
+      .touchevents & {
+        font-size: 16px; /* [2] */
+      }
+    }
+
+    &[disabled],
+    &.disabled {
+      color: $disabled-color;
+      cursor: not-allowed;
+    }
+
+    @include placeholder-styles {
+      position: relative;
+      top: .0618em;
+    }
+
+    @include webkit-autofill {
+      box-shadow: inset 0 0 0 gr(2) $input-bg; /* [3] */
+      -webkit-text-fill-color: font("color") !important;
+
+      &[disabled],
+      &.disabled {
+        -webkit-text-fill-color: $disabled-color !important;
+      }
+
+      &:focus {
+        -webkit-text-fill-color: font("color--dark") !important;
+      }
+    }
+  }
+
+// ----------------
+
+
+%#{$block} {
+  &__text {
+    @extend %text-input;
+
+    &[type="search"] {
+      @extend %reset-appearance;
+      box-sizing: border-box;
+    }
+
+    &--border {
+      border: 1px solid color("border");
+    }
+    &--full-width {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &__textarea {
+    @extend %text-input;
+    padding: $input-padding;
+    resize: vertical;
+    line-height: 1.2;
+    height: auto;
+  }
+
+  &__label {
+    @extend %transition;
+
+    &:active {
+      user-select: none; /* [4] */
+    }
+
+    .#{$block}__checkbox + & {
+      overflow: hidden;
+      display: block;
+      text-align: left;
+    }
+
+    .#{$block}__checkbox:checked + & {
+      color: font("color--dark");
+    }
+
+    .#{$block}__checkbox[disabled] + & {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__required {
+    &:after {
+      content: " *";
+      color: color("red", 500);
+    }
+  }
+
+  &__select {
+    max-width: 12em;
+
+    .touchevents & {
+      font-size: 16px;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__radio,
+  &__checkbox {
+    float: left;
+    margin-right: gr(-1);
+
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+  }
+}

@@ -1,0 +1,113 @@
+// ========
+//  TABLES
+// ========
+
+/*
+  [*] Generic styles for tables and table elements.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "table";
+
+  $cell-padding-x: size("cell--gutter");
+  $cell-padding-y: size("gutter") / 2;
+
+// ----------------
+
+
+@if (config("tableRules")) {
+  .#{$block} {
+    td,
+    th {
+      padding-top:    $cell-padding-y;
+      padding-bottom: $cell-padding-y;
+    }
+
+    &__wrap {
+      @extend %momentum-scroll;
+    }
+
+    &--full {
+      width: 100%;
+    }
+
+    &--stretch {
+      @include mq("mini", max-width) {
+        @include stretch;
+      }
+
+      @include mq("mini", to, "small") {
+        width: 100vw;
+        left: calc(-50vw + 50%);
+
+        .no-csscalc & {
+          width: auto;
+        }
+      }
+
+      @include mq("small", max-width) {
+        td,
+        th {
+          &:first-child {
+            padding-left: $cell-padding-y;
+          }
+
+          &:last-child {
+            padding-right: $cell-padding-y;
+          }
+        }
+      }
+    }
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  td,
+  th {
+    vertical-align: middle;
+
+    + th,
+    + td {
+      padding-left: 1em;
+
+      @include mq("tiny") {
+        padding-left: $cell-padding-x;
+      }
+    }
+
+    &.expand { width: 100%; }
+    &.top    { vertical-align: top; }
+    &.middle { vertical-align: middle; }
+    &.bottom { vertical-align: bottom; }
+    &.flat   { padding-top: 0; padding-bottom: 0; }
+  }
+
+  tr {
+    &.border-top {
+      &--dark {
+        > td,
+        > th {
+          border-top: 1px solid color("border--dark");
+        }
+      }
+    }
+
+    &.border-bottom {
+      &--dark {
+        > td,
+        > th {
+          border-bottom: 1px solid color("border--dark");
+        }
+      }
+    }
+  }
+
+  tfoot {
+    z-index: 1;
+  }
+}

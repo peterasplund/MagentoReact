@@ -1,0 +1,31 @@
+// ============
+//  SEPARATORS
+// ============
+
+/*
+  [*] Generic layout class name used for row spacing with margin,
+      border and padding.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "separator";
+
+// ----------------
+
+
+@if (config("includeSeparators")) {
+  .separator {
+    @extend %separator;
+
+    &--small {
+      @extend %separator--small;
+    }
+
+    &--large {
+      @extend %separator--large;
+    }
+  }
+}

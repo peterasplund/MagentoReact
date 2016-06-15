@@ -1,3 +1,50 @@
-body {
-  background: salmon;
+/*
+  setup
+  ------------------------------------------------------------
+
+  the include order here is important. variables need
+  functions, mixins and certain functions need variables
+
+*/
+
+:global {
+
+  // font-faces:
+  @import
+    "utilities/fonts";
+
+  // libraries:
+  @import
+    "libs/normalize.scss";
+
+  // functions:
+  @import
+    "utilities/functions",
+    "/utilities/resets";
+
+  // variables:
+  @import
+    "utilities/color-palette",
+    "utilities/variables";
+
+  // variable-dependant functions:
+  @import
+    "utilities/color-functions";
+
+  // mixins:
+  @import
+    "utilities/media-queries",
+    "utilities/mixins";
+
+  // silent classes:
+  @import
+    "utilities/resets",
+    "base/base",
+    "base/typography",
+    "base/input",
+    "base/buttons",
+    "helpers/typography-helpers",
+    "utilities/helpers",
+    "utilities/flex";
+
 }

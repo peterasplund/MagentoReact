@@ -1,0 +1,15 @@
+
+.block {
+  background: #333;
+  text-align: center;
+  margin-bottom: 2em;
+}
+.link {
+  display: inline-block;
+  color: #fff;
+
+  padding: .8em 2em;
+}
+.link_active {
+  color: #aaa;
+}

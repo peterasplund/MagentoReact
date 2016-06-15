@@ -1,0 +1,156 @@
+// ===========
+//  KEYFRAMES
+// ===========
+
+/*
+  [*] This document collects all animation keyframes to encourage/enable
+      them to be reused! \o/
+*/
+
+
+/*
+  rotate spinner
+*/
+@mixin rotateSpinner {
+  @keyframes rotateSpinner {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+
+/*
+  sliders
+*/
+
+@mixin slideUp {
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(gr(1));
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin slideDown {
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-#{gr(1)});
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin slideLeft {
+  @keyframes slideLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin slideRight {
+  @keyframes slideLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+
+/*
+  faders
+*/
+
+@mixin fadeOut {
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+@mixin fadeIn {
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+
+/*
+  grow
+*/
+
+@mixin growIn {
+  @keyframes growIn {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+
+/*
+  off screen enters
+*/
+
+@mixin bottomUp {
+  @keyframes bottomUp {
+    0% {
+      transform: translateY(100%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+
+
+/*
+  INCLUDES
+*/
+
+@include rotateSpinner;
+@include slideLeft;
+@include fadeOut;

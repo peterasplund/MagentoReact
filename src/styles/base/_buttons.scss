@@ -1,0 +1,219 @@
+// ========
+//  BUTTON
+// ========
+
+/*
+  [*] Generic button styles go here. Generally speaking these styles should
+      support anchor links and button elements.
+
+      Apply both the button class name and the styles you want, for instance
+      `<button class="button button--positive">`.
+
+  [1] Minifiers seem to move this around, so we explicitly override focus and
+      hover to avoid specificity conflicts.
+
+  [2] Make room for the spinner!
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "button";
+
+  $button-padding-y: gr(-2);
+  $button-padding-x: size("button--padding");
+
+  %hover-style {
+    background: color("navbar", 10%);
+  }
+
+  %active-style {
+    background: color("navbar");
+    color: rgba(#fff, .5);
+  }
+
+  %plain-button {
+    display: inline-block;
+    padding: $button-padding-y ($button-padding-x);
+    color: #fff;
+    background: color("navbar");
+    text-shadow: none;
+    text-align: center;
+    touch-action: manipulation;
+    font-weight: 400;
+
+    padding: 0.6em 2em;
+
+    &:focus,
+    &:hover {
+      @extend %hover-style;
+    }
+
+    &:active:hover:not([disabled]) {
+      @extend %active-style;
+    }
+  }
+
+// ----------------
+
+
+button {
+  @extend %font-smoothing;
+  @extend %reset-input;
+  @extend %transition;
+}
+
+%#{$block} {
+  @extend %plain-button;
+
+
+
+  &[disabled] {
+    background: color("solid");
+    color: rgba(color("font"), .5);
+    cursor: not-allowed;
+
+    &:focus,
+    &:hover { /* [1] */
+      box-shadow: none;
+    }
+  }
+
+  &.is-processing {
+    cursor: not-allowed;
+    box-shadow: none;
+    padding-right: size("spinner") + $button-padding-x + gr(-2); /* [2] */
+
+    .no-cssanimations & {
+      padding-right: $button-padding-x;
+    }
+  }
+
+  &.is-finished {
+    color: #fff;
+    background: color("positive");
+  }
+
+  &--light {
+    background: color("primary--light");
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      background: color("primary--light", 10%);
+    }
+
+    &:active:hover:not[disabled] {
+      background: color("primary--light", -10%);
+    }
+  }
+
+  &--positive {
+    background: color("positive");
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      background: color("positive", 10%);
+    }
+
+    &:active:hover:not([disabled]) {
+      background: color("positive");
+    }
+  }
+
+  &--negative {
+    background: color("grey", 400);
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      color: #fff;
+      background: color("negative");
+    }
+
+    &:active:hover:not([disabled]) {
+      background: color("negative", -10%);
+    }
+  }
+
+  &--blank {
+    color: font("color--dark");
+    border-color: font("color--dark");
+    background: transparent;
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      color: #fff;
+      background: font("color--dark");
+    }
+
+    &:active:hover:not([disabled]) {
+      background: color(font("color--dark"), -10%);
+    }
+  }
+
+  &--primary {
+    background: color("primary");
+    border-color: color("primary");
+    color: #fff;
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      background: color("primary", 10%);
+    }
+
+    &:active:hover:not([disabled]) {
+      color: rgba(#fff, .5);
+      background: color("primary", -10%);
+    }
+  }
+
+  &--accent {
+    background: color("accent");
+    border-color: color("accent");
+    color: color("primary");
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      background: color("accent", 10%);
+    }
+
+    &:active:hover:not([disabled]) {
+      color: rgba(color("primary"), .5);
+      background: color("accent", -10%);
+    }
+  }
+
+  &--solid {
+    background: color("solid");
+    color: color("primary");
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      color: #fff;
+    }
+  }
+
+  &--white {
+    background: #fff;
+    color: color("primary");
+
+    &:focus:not([disabled]),
+    &:hover:not([disabled]) {
+      background: #fff;
+    }
+
+    &:active:hover:not([disabled]) {
+      color: rgba(color("primary"), .5);
+      background: color("grey", 50);
+    }
+  }
+
+  &--stretch {
+    width: 100%;
+  }
+
+  &--thick {
+    padding-top:    gr(-1);
+    padding-bottom: gr(-1);
+  }
+}

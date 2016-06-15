@@ -1,0 +1,72 @@
+// =================
+//  COLOR FUNCTIONS
+// =================
+
+////
+/// @group Color functions
+/// @author Nils Kaspersson
+////
+
+
+
+// color:
+// ------
+
+/// #Get and manipulate colors.
+///
+/// Pass any color or a variable from the `$site: (colors: (...))` or `$color-palette` maps to fetch and optionally modify it.
+///
+/// The following colors are available in `$color-palette` by default:
+///
+///     red
+///     pink
+///     purple
+///     deep-purple
+///     indigo
+///     blue
+///     light-blue
+///     cyan
+///     teal
+///     green
+///     light-green
+///     lime
+///     yellow
+///     amber
+///     orange
+///     deep-orange
+///     brown
+///     grey
+///     blue-grey
+///
+/// @param {Color} $color - A string matching a key in the `$colors` or the `$color-palette` map, or a raw color value.
+///
+/// @param {Number} $saturation [null] - Pass a percentual value of `-100%` to `100%` to lighten/darken the fetched color. This also accepts numbers ranging from `-1000` to `1000` which is converted to a percentage or matches a color key value in `$color-palette`.
+/// @return {Color}
+
+@function color($color, $saturation: null) {
+  $strength: if($saturation == null, 0%, if(unitless($saturation), percentage($saturation / 1000), $saturation));
+
+  @if type-of($color) == string {
+    @if map-has-key(map-get($site, "colors"), $color) {
+      @return scale-color(map-get(map-get($site, "colors"), $color), $lightness: $strength);
+    }
+
+    @else if map-has-key($color-palette, $color) {
+      @if map-has-key(map-get($color-palette, $color), $saturation) {
+        @return map-deep-get($color-palette, $color, $saturation);
+      }
+
+      @else {
+        @return scale-color(map-deep-get($color-palette, $color, 500), $lightness: $strength);
+      }
+    }
+
+    @else {
+      @return false;
+    }
+  }
+
+  @else if type-of($color) == color {
+    @return scale-color($color, $lightness: $strength);
+  }
+}

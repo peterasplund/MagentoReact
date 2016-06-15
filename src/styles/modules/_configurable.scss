@@ -1,0 +1,29 @@
+// ==============
+//  CONFIGURABLE
+// ==============
+
+/*
+  [*] Styles for the configurable product views
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "configurable";
+
+// ----------------
+
+
+.#{$block} {
+  &__item {
+    @include mq("mini", max-width) {
+      width: 50%;
+      text-align: center;
+    }
+
+    @include mq("mini") {
+      max-width: (100% / 3);
+    }
+  }
+}

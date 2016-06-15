@@ -1,0 +1,91 @@
+// ==============
+//  FIRECHECKOUT
+// ==============
+
+/*
+  [*] Die in a fire, please.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "firecheckout";
+
+// ----------------
+
+
+##{$block} {
+  &-form {
+    @extend %transition;
+
+    &.is-updating {
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
+
+  &-spinner,
+  &-mask {
+    display: none;
+  }
+}
+
+.#{$block} {
+  &-window {
+    @extend %flex;
+    @extend %flex-direction-column;
+    @extend %justify-content-center;
+    padding: size("gutter") gr(-1);
+    max-width: breakpoints("tiny");
+    width: 100% !important;
+
+    position: fixed;
+    top:    0 !important;
+    bottom: 0 !important;
+    right:  0 !important;
+    left:   0 !important;
+    margin: 0 auto !important;
+
+    // @include mq("tiny", max-width) {
+    //   width: auto !important;
+    // }
+
+    .no-flexbox & {
+      @extend %momentum-scroll;
+    }
+
+    > .content {
+      @extend %momentum-scroll;
+      width: auto !important;
+      margin: 0 auto;
+      background: #fff;
+      padding: size("gutter");
+      box-shadow: bottom-shadow(4);
+      border-radius: size("br") size("br") 0 0;
+      @include shadow-covers();
+
+      .page-title {
+        font-size: 2em;
+        color: font("color--dark");
+        font-weight: 500;
+        margin-bottom: 1em;
+      }
+    }
+
+    > .actionbar {
+      @extend %flex-shrink--forbid;
+      border-radius: 0 0 size("br") size("br");
+      background: #fff;
+      padding: 1em size("gutter");
+      overflow: hidden;
+
+      .button {
+        @extend %transition;
+        @extend .button--positive;
+        float: right;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -32,7 +32,7 @@ export default class extends Component {
     }
     return (
       <div>
-        <h1>Kategori {this.props.params.slug}</h1>
+        <h1>{this.props.params.slug}</h1>
 
         <ProductList products={category.products} />
 

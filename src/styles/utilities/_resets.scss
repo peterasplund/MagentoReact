@@ -1,0 +1,48 @@
+// ========
+//  RESETS
+// ========
+
+/*
+  [1] Reset lists.
+
+  [2] Default list styles.
+
+  [3] Reset input elements. Overkill for some types of elements, but it's more
+      straightforward to extend just one silent class.
+
+      Also remember to reset appearance when needed, see [4].
+
+  [4] Remove native styles from elements such as <select>, type="checkbox",
+      type="radio" etc. Since this is a non-standard property, autoprefixers
+      won't handle browser specific prefixes.
+ */
+
+%reset-list { /* [1] */
+  margin:       0;
+  padding-left: 0;
+  line-height:  1;
+  list-style:   none;
+}
+
+%basic-list { /* [2] */
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+%reset-input { /* [3] */
+  border:     none;
+  outline:    none;
+  background: none;
+  box-shadow: none;
+
+  // line-height:   1;
+  border-radius: 0;
+  padding:       0;
+  margin:        0;
+}
+
+%reset-appearance { /* [4] */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}

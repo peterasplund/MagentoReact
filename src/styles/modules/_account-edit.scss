@@ -1,0 +1,59 @@
+// ==============
+//  ACCOUNT EDIT
+// ==============
+
+/*
+  [*] Styles for the customer account edit views
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "account-edit";
+
+  $edit-offset: gr(-1);
+
+// ----------------
+
+
+.#{$block} {
+  &__item {
+    & + & {
+      margin-top: gr(-2);
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    color: color("primary");
+    border-bottom: 1px solid transparent;
+    margin: 0 $edit-offset;
+
+    &:before,
+    &:after {
+      display: block;
+      @include position(absolute, 0, null);
+    }
+
+    &:before {
+      content: "[";
+      left: -$edit-offset;
+    }
+
+    &:after {
+      content: "]";
+      right: -$edit-offset;
+    }
+
+    &:focus,
+    &:hover {
+      border-bottom-color: color("primary");
+    }
+
+    &:active:hover {
+      opacity: .5;
+      border-bottom-style: dotted;
+    }
+  }
+}

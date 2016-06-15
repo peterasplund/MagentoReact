@@ -1,0 +1,175 @@
+// =========
+//  HELPERS
+// =========
+
+
+// font smoothing:
+%font-smoothing {
+  text-rendering: optimizeLegibility;
+
+  -moz-osx-font-smoothing: grayscale;
+   -webkit-font-smoothing: antialiased;
+
+  -moz-font-feature-settings: "liga" on;
+}
+
+
+// clearfix:
+// ---------
+
+%clearfix {
+  &:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+.cf {
+  @extend %clearfix;
+}
+
+
+
+// transitions:
+// ------------
+
+%transition {
+  transition: color        transition("duration"),
+              background   transition("duration"),
+              border-color transition("duration"),
+              opacity      transition("duration"),
+              transform    transition("duration"),
+              box-shadow   transition("duration");
+
+  &:active:hover {
+    transition: none;
+  }
+}
+
+%transition--transform {
+  transition: transform transition("duration") transition("swift-in"),
+              opacity   transition("duration") transition("swift-in");
+}
+
+%swift-in {
+  transition-timing-function: transition("swift-in");
+}
+
+
+// spacing:
+// --------
+
+%vertical-margins--mini {
+  @include vertical-margins(gr(-1));
+}
+
+%vertical-margins--small {
+  @include vertical-margins(1em);
+}
+
+%vertical-margins {
+  @include vertical-margins(size("gutter"));
+}
+
+%vertical-margins--large {
+  @include vertical-margins(gr(2));
+}
+
+%vertical-margins--huge {
+  @include vertical-margins(gr(3));
+}
+
+
+
+// separators:
+// -----------
+
+%separator--small {
+  @include separator(gr(-1));
+}
+
+%separator {
+  @include separator(font("size--large"));
+}
+
+%separator--large {
+  @include separator(gr(2));
+}
+
+
+
+// momentum scroll:
+// ----------------
+
+@mixin momentum-scroll {
+  overflow: auto;
+
+  .touchevents & {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+%momentum-scroll {
+  @include momentum-scroll;
+}
+
+
+
+// ellipsis:
+// ---------
+
+%ellipsis {
+  display:        block;
+  overflow:       hidden;
+  white-space:    nowrap;
+  text-overflow:  ellipsis;
+  vertical-align: middle;
+
+  padding-top:    .1em;
+  padding-bottom: .1em;
+}
+
+
+// remeber to display child element as inline-block
+%vertical-center {
+  white-space: nowrap;
+  text-align: center;
+
+  &:before {
+    content: "";
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+
+// filter blur:
+// ------------
+
+@mixin filter-blur($strength: site("blur")) {
+  -webkit-filter: blur($strength);
+     -moz-filter: blur($strength);
+          filter: blur($strength);
+}
+
+%filter-blur {
+  @include filter-blur(site("blur"));
+}
+
+
+// hide after breakpoint:
+// ----------------------
+
+.hide-above--medium {
+  @extend %hide-above--medium;
+}
+
+
+.is {
+  &-static {
+    position: static;
+  }
+}

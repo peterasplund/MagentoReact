@@ -1,0 +1,50 @@
+// ==============
+//  "PRO" LABELS
+// ==============
+
+/*
+  [*] And the award for the least fiting name goes to...
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "prolabel";
+
+  $width: 40px;
+  $offset-y: .5em;
+  $offset-x: gr(-2);
+
+// ----------------
+
+
+.#{$block} {
+  position: absolute;
+  width:  auto !important;
+  height: auto !important;
+
+  &.top-left {
+    top:  $offset-y;
+    left: $offset-x;
+  }
+
+  &.top-right {
+    top:   $offset-y;
+    right: $offset-x;
+  }
+
+  &.bottom-right {
+    bottom: $offset-y;
+    right:  $offset-x;
+  }
+
+  &.bottom-left {
+    bottom: $offset-y;
+    left:   $offset-x;
+  }
+
+  &-image {
+    width: $width;
+  }
+}

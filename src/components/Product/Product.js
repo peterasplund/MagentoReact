@@ -5,21 +5,10 @@ import numeral from 'numeral';
 import { add as addToCart } from '../../redux/modules/cart';
 import { add as addMessage } from '../../redux/modules/messages';
 
+const style = require('./Product.scss');
+
 numeral.languageData().delimiters.thousands = ' ';
 numeral.languageData().delimiters.decimal = ',';
-
-const blockStyle = {
-  border: '1px solid #555',
-  padding: '1.5em',
-  display: 'inline-block',
-  verticalAlign: 'top',
-  width: '200px',
-  minHeight: '335px',
-  marginBottom: '10px',
-  marginRight: '10px',
-  textAlign: 'center'
-};
-
 
 @connect(
   state => ({}), { addToCart, addMessage }
@@ -47,7 +36,7 @@ export default class extends Component {
     const { data } = this.props;
 
     return (
-      <form style={blockStyle}>
+      <form className={style.block}>
 
         <img src={data.thumbnail} style={{maxWidth: '100%'}} />
         <strong>{data.name}</strong>

@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
-import { Cart, Messages } from '../';
+import { Messages } from '../';
+import { Navbar } from '../../components';
 
 import { load } from '../../redux/modules/categories';
+
+import logo from './logo.svg';
+
+const style = require('./App.scss');
 
 @connect(
   state => ({categories: state.categories}), { load }
@@ -27,16 +31,13 @@ export default class extends Component {
     }
 
     return (
-      <div>
-        <nav>
-        {this.props.categories.data.map((x, i) => {
-          if (x.level === "2") {
-            return <Link style={{display: 'inline-block', padding: '0.5em 1em', background: '#333', color: '#fff'}} to={'/category/' + x.url_key} key={i}>{x.name}</Link>
-          }
-        })}
-        </nav>
-        <Cart />
-        <div>
+      <div className={style.block}>
+        <div className={style.wrapper}>
+          <div className={style.logo} dangerouslySetInnerHTML={{__html: logo}}>
+          </div>
+        </div>
+        <Navbar categories={this.props.categories} />
+        <div className={style.wrapper}>
           {this.props.children}
         </div>
         

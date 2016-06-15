@@ -1,0 +1,106 @@
+// ==================
+//  CATEGORIES PANEL
+// ==================
+
+/*
+  [*] Styles for the categories navigation inside of the panel
+      area.
+*/
+
+
+// local variables:
+// ----------------
+
+  $block: "categories-panel";
+
+  $bg: color("solid", 60%);
+  $triangle-length: .8em;
+
+  %right-block {
+    @include mq("tiny") {
+      width: 50%;
+      background: $bg;
+      @include position(absolute, 0, 0, 0, null);
+    }
+  }
+
+// ----------------
+
+
+.#{$block} {
+  @include mq("medium") {
+    display: none !important;
+  }
+
+  &__wrap {
+    &:before {
+      @extend %right-block;
+      content: "";
+      display: block;
+    }
+  }
+
+  &__list {
+    @include mq("tiny") {
+      width: 50%;
+      position: static;
+    }
+  }
+
+  &__item {
+    position: static;
+
+    > .panel__target {
+      @extend %momentum-scroll;
+      @extend %right-block;
+      @include shadow-covers($bg, .4);
+
+      @include mq("tiny") {
+        transition: none;
+      }
+    }
+  }
+
+  &__link {
+    padding: gr(-1) gr(-1) gr(-1) gr(2);
+    border-bottom-color: $bg;
+
+    .#{$block}__item:last-child & {
+      border-bottom: 0;
+    }
+
+    &--sub {
+      border-bottom-color: color("solid");
+
+      @include mq("tiny", max-width) {
+        &:before {
+          content: "–";
+        }
+      }
+    }
+
+    &.is-open {
+      color: color("primary");
+
+      @include mq("tiny", max-width) {
+        background: $bg;
+        border-bottom-color: color("solid");
+      }
+    }
+  }
+
+  &__toggle-sub {
+    &.is-open {
+      &:before {
+        @include arrow(right, $triangle-length, color("solid"));
+        z-index: 1;
+        margin-top: -$triangle-length;
+        top: 50%;
+      }
+    }
+  }
+
+  &__thumbnail {
+    right: gr(-1);
+  }
+}

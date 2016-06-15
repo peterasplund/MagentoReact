@@ -25,7 +25,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style!css',
+        loader: 'style!css?modules!sass',
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline'
       }
     ]
   }

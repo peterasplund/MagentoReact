@@ -1,0 +1,27 @@
+// ==============
+//  CUSTOM FONTS
+// ==============
+
+/*
+  [*] Custom font faces goes here.
+
+      Format them like this:
+
+      @font-face {
+        font-family: "Name";
+        font-weight: 400;
+        src: url("../path/fontname.eot");
+        src: url("../path/fontname.eot?#iefix")   format("embedded-opentype"),
+             url("../path/fontname.woff")         format("woff"),
+             url("../path/fontname.ttf")          format("truetype"),
+             url("../path/fontname.svg#fontname") format("svg");
+      }
+
+      Use the same family name but different font weights for
+      different weights of the same family. In other words; DON'T
+      name font faces with another weight as "name-regular",
+      "name-bold" or similar. Just use the same name but a
+      different weight.
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300,300italic,400italic,600italic,700italic,800,800italic);
