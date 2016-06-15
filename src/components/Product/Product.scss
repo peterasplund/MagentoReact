@@ -1,3 +1,5 @@
+@import "../../styles/import";
+
 .block {
   background: #fff;
   border: 1px solid #ccc;
@@ -9,5 +11,10 @@
   margin-bottom: 10px;
   margin-right: 10px;
   text-align: center;
-
+  transition: opacity 0.3s transition("swift--in");
+  opacity: 1;
+  
+  &.adding {
+    opacity: 0.3;
+  }
 }

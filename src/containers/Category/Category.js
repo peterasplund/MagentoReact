@@ -35,9 +35,7 @@ export default class extends Component {
         <h1>{this.props.params.slug}</h1>
 
         <ProductList products={category.products} />
-
-        <Link to="/">Tillbaka</Link>
-        </div>
+      </div>
     );
   }
 

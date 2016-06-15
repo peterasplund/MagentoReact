@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import { Messages } from '../';
@@ -33,15 +34,16 @@ export default class extends Component {
     return (
       <div className={style.block}>
         <div className={style.wrapper}>
-          <div className={style.logo} dangerouslySetInnerHTML={{__html: logo}}>
-          </div>
+          <Link className={style.logo_link} to="/">
+            <div className={style.logo} dangerouslySetInnerHTML={{__html: logo}} />
+          </Link>
         </div>
         <Navbar categories={this.props.categories} />
         <div className={style.wrapper}>
           {this.props.children}
         </div>
         
-        { /*<Messages />*/ }
+        <Messages />
       </div>
     );
   }

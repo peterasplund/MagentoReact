@@ -1,0 +1,25 @@
+.slide-down {
+  &-enter {
+    transform: translateY(100%);
+    opacity: 0;
+
+    &.slide-down-enter-active {
+      opacity: 1;
+      transform: translateY(0%);
+      transition: opacity   0.25s transition("swift-in"),
+                  transform 0.25s transition("swift-in");
+    }
+  }
+  &-leave {
+    transform: translateY(0%);
+    opacity: 1;
+
+    &.slide-down-leave-active {
+      transform: translateY(100%);
+      opacity: 0;
+      transition: opacity   0.25s transition("swift-in"),
+                  transform 0.25s transition("swift-in");
+    }
+  }
+
+}

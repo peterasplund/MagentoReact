@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as messageActions from 'redux/modules/messages';
+import * as messageActions from '../../redux/modules/messages';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+const style = require('./Messages.scss');
 
 @connect(
   state => ({messages: state.messages}),
@@ -49,11 +51,11 @@ export default class Message extends Component {
   }
 
   renderMessage(message) {
-    const classes = styles.message + ' ' + styles[message.status];
+    const classes = style.message + ' ' + style[message.status];
 
     setTimeout(() => {
       this.closeMessage(message.id);
-    }, this.props.timeout);
+    }, this.props.timeout || 3000);
 
     return (
       <div key={message.id} className={classes}>
@@ -66,8 +68,8 @@ export default class Message extends Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        <ReactCSSTransitionGroup transitionName="slideDown" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
+      <div className={style.container}>
+        <ReactCSSTransitionGroup transitionName="slide-down" transitionEnterTimeout={250} transitionLeaveTimeout={250}>
         {this.props.messages.map((message) => this.renderMessage(message))}
         </ReactCSSTransitionGroup>
       </div>

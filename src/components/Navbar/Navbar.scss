@@ -7,9 +7,9 @@
 .link {
   display: inline-block;
   color: #fff;
-
   padding: .8em 2em;
-}
-.link_active {
-  color: #aaa;
+
+  &_active {
+    color: #aaa;
+  }
 }

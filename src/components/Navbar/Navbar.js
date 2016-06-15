@@ -7,7 +7,7 @@ const style = require('./Navbar.scss');
 export default class extends Component {
 
   static propTypes = {
-    categories: React.PropTypes.array
+    categories: React.PropTypes.object
   }
 
   render() {
