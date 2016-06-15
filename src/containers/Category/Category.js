@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 import { ProductList } from '../../components/';
 import { load } from '../../redux/modules/category';
 
 @connect(
-  state => ({category: state.category}), { load }
+  state => ({ category: state.category }), { load }
 )
 export default class extends Component {
 
   static propTypes = {
     category: React.PropTypes.object,
-    load: React.PropTypes.func
+    params: React.PropTypes.object,
+    load: React.PropTypes.func,
   }
 
   componentWillMount() {

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 import { load } from '../../redux/modules/product';
 
 @connect(
-  state => ({product: state.product}), { load }
+  state => ({ product: state.product }), { load }
 )
 export default class extends Component {
 
   static propTypes = {
     product: React.PropTypes.object,
-    load: React.PropTypes.func
+    load: React.PropTypes.func,
+    params: React.PropTypes.object
   }
 
   componentWillMount() {
@@ -26,7 +26,7 @@ export default class extends Component {
     return (
       <div>
         <h1>{product.data.name}</h1>
-        <img src={product.data.image} />
+        <img alt={product.data.name} src={product.data.image} />
         <br />
         <p>{product.data.description}</p>
       </div>

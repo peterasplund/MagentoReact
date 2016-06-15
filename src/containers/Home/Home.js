@@ -1,14 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
 
-export default class extends Component {
-
-  render() {
-    return (
-      <div>
-        <h1>Home</h1>
-      </div>
-    );
-  }
-
-}
+export default () =>
+  <div>
+    <h1>Home</h1>
+  </div>;

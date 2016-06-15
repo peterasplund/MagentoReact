@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action = {}) {
 export function close(id) {
   return {
     type: CLOSE,
-    id: id
+    id
   };
 }
 
@@ -45,8 +45,8 @@ export function add(status, text, timeout = 6000) {
   }, timeout);
   return {
     type: ADD,
-    status: status,
-    text: text
+    status,
+    text
   };
 }
 

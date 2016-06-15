@@ -1,28 +1,23 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { Cart } from '../../containers';
 
 const style = require('./Navbar.scss');
 
-export default class extends Component {
 
-  static propTypes = {
-    categories: React.PropTypes.object
-  }
+const Navbar = ({ categories }) =>
+  <nav className={style.block}>
+    {categories.map((x, i) => {
+      if (x.level === '2') {
+        return <Link className={style.link} activeClassName={style.link_active} to={`/category/${x.url_key}`} key={i}>{x.name}</Link>;
+      }
+      return null;
+    })}
+    <Cart />
+  </nav>;
 
-  render() {
-    const { categories } = this.props;
+Navbar.propTypes = {
+  categories: PropTypes.array.isRequired,
+};
 
-    return (
-      <nav className={style.block}>
-        {categories.data.map((x, i) => {
-          if (x.level === "2") {
-            return <Link className={style.link} activeClassName={style.link_active} to={'/category/' + x.url_key} key={i}>{x.name}</Link>
-          }
-        })}
-        <Cart />
-      </nav>
-    );
-  }
-
-}
+export default Navbar;

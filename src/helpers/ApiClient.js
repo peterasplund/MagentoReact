@@ -7,14 +7,14 @@ const methods = ['get', 'post', 'put', 'patch', 'del'];
 const apiHost = 'http://local.magento/';
 
 function formatUrl(path) {
-  const adjustedPath = path[0] !== '/' ? '/' + path : path;
-  return apiHost + '/API' + adjustedPath;
+  const adjustedPath = path[0] !== '/' ? `/${path}` : path;
+  return `${apiHost}/API${adjustedPath}`;
 }
 
 export default class ApiClient {
-  constructor(req) {
+  constructor() {
     // this.token = null;
-    methods.forEach((method) =>
+    methods.forEach((method) => {
       this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
         const request = superagent[method](formatUrl(path));
 
@@ -39,8 +39,14 @@ export default class ApiClient {
           request.send(data);
         }
 
-        request.withCredentials().end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
-      }));
+        request.withCredentials().end((err, { body } = {}) => {
+          if (err) {
+            reject(body || err);
+          }
+          return resolve(body);
+        });
+      });
+    });
   }
   empty() {}
 }

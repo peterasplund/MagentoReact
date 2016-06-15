@@ -12,14 +12,15 @@ import logo from './logo.svg';
 const style = require('./App.scss');
 
 @connect(
-  state => ({categories: state.categories}), { load }
+  state => ({ categories: state.categories }), { load }
 )
 
 export default class extends Component {
 
   static propTypes = {
     categories: React.PropTypes.object,
-    children: React.PropTypes.object
+    children: React.PropTypes.object,
+    load: React.PropTypes.func,
   }
 
   componentDidMount() {
@@ -27,22 +28,22 @@ export default class extends Component {
   }
 
   render() {
-    if (this.props.categories.loading) {
+    if (!this.props.categories.loaded) {
       return <div>Laddar...</div>;
     }
-
+    console.log(this.props.categories);
     return (
       <div className={style.block}>
         <div className={style.wrapper}>
           <Link className={style.logo_link} to="/">
-            <div className={style.logo} dangerouslySetInnerHTML={{__html: logo}} />
+            <div className={style.logo} dangerouslySetInnerHTML={{ __html: logo }} />
           </Link>
         </div>
-        <Navbar categories={this.props.categories} />
+        <Navbar categories={this.props.categories.data} />
         <div className={style.wrapper}>
           {this.props.children}
         </div>
-        
+
         <Messages />
       </div>
     );

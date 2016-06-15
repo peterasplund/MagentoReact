@@ -17,7 +17,7 @@ const initialState = {
   loaded: false,
   open: false,
   data: null
-}
+};
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -28,7 +28,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-    return {
+      return {
         ...state,
         loading: false,
         loaded: true,
@@ -39,7 +39,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
-      }
+      };
 
 
     case ADD:
@@ -48,7 +48,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case ADD_SUCCESS:
-    return {
+      return {
         ...state,
         loading: false,
         data: action.result.data
@@ -57,7 +57,7 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
-      }
+      };
 
 
     case REMOVE:
@@ -66,7 +66,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case REMOVE_SUCCESS:
-    return {
+      return {
         ...state,
         loading: false,
         data: action.result.data
@@ -75,15 +75,14 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         loading: false,
-      }
+      };
 
 
     case TOGGLE:
       return {
         ...state,
         open: !state.open,
-      }
-
+      };
 
     default:
       return state;
@@ -100,14 +99,14 @@ export function load() {
 export function add(product, qty = 1) {
   return {
     types: [ADD, ADD_SUCCESS, ADD_FAIL],
-    promise: (client) => client.get('Cart/add/product/' + product + '/qty/' + qty)
+    promise: (client) => client.get(`Cart/add/product/${product}/qty/${qty}`)
   };
 }
 
 export function remove(product) {
   return {
     types: [REMOVE, REMOVE_SUCCESS, REMOVE_FAIL],
-    promise: (client) => client.get('Cart/delete/id/' + product)
+    promise: (client) => client.get(`Cart/delete/id/${product}`)
   };
 }
 

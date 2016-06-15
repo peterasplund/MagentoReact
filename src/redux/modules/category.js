@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
-      }
+      };
     default:
       return state;
   }
@@ -36,6 +36,6 @@ export default function reducer(state = initialState, action = {}) {
 export function load(slug) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('Category/getProducts/s/' + slug)
+    promise: (client) => client.get(`Category/getProducts/s/${slug}`)
   };
 }

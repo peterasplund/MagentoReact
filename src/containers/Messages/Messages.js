@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as messageActions from '../../redux/modules/messages';
+import { autobind } from 'core-decorators';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const style = require('./Messages.scss');
 
 @connect(
-  state => ({messages: state.messages}),
+  state => ({ messages: state.messages }),
   {
-    'closeMessage': messageActions.close,
-    'closeNewest': messageActions.closeNewest
+    closeMessage: messageActions.close,
+    closeNewest: messageActions.closeNewest
   })
 export default class Message extends Component {
   static propTypes = {
@@ -43,6 +44,7 @@ export default class Message extends Component {
     }
   }
 
+  @autobind
   closeMessage(id, e) {
     if (typeof e !== 'undefined') {
       e.stopPropagation();
@@ -51,7 +53,7 @@ export default class Message extends Component {
   }
 
   renderMessage(message) {
-    const classes = style.message + ' ' + style[message.status];
+    const classes = `${style.message} ${style[message.status]}`;
 
     setTimeout(() => {
       this.closeMessage(message.id);
@@ -59,7 +61,7 @@ export default class Message extends Component {
 
     return (
       <div key={message.id} className={classes}>
-        <div onClick={this.closeMessage.bind(this, message.id)}>
+        <div>
           {message.text}
         </div>
       </div>

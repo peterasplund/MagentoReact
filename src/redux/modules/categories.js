@@ -6,7 +6,7 @@ const initialState = {
   loading: false,
   loaded: false,
   data: []
-}
+};
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-    return {
+      return {
         ...state,
         loading: false,
         loaded: true,
@@ -27,13 +27,13 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         loaded: false,
-      }
+      };
     default:
       return state;
   }
 }
 
-export function load(id) {
+export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get('Category/getCategories')

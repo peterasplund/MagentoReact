@@ -1,7 +1,28 @@
 {
-  "parser": "babel-eslint",
-  "env": {
-    "browser": true,
-    "node": true
-  }
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true,
+      "mocha": true
+    },
+    "plugins": [
+      "react",
+      "import"
+    ],
+    "rules": {
+      "one-var": "off",
+      "no-multi-spaces": "off",
+      "no-console": "off",
+      "indent": ["error", 2, { "VariableDeclarator": { "var": 2, "let": 2, "const": 3 }, "SwitchCase": 1 }],
+      "no-param-reassign": "off",
+      "max-len": ["error", 200],
+      "comma-dangle": "off"
+    },
+    "settings": {
+      "import/parser": "babel-eslint",
+      "import/resolve": {
+        "moduleDirectory": ["node_modules", "src"]
+      }
+    }
 }
