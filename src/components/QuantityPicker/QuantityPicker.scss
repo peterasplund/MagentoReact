@@ -1,0 +1,26 @@
+@import "../../styles/import";
+
+.input {
+  width: 60px;
+  height: 25px;
+  border: none;
+  text-align: center;
+  vertical-align: top;
+  display: block;
+  float: left;
+
+  &:focus {
+    border-color: #999;
+  }
+}
+.button {
+  height: 25px;
+  padding: 0 1.2em;
+  background: color("secondary", 90%);
+  font-weight: bold;
+  color: font("color--muted");
+  vertical-align: top;
+  text-transform: uppercase;
+  display: block;
+  float: left;
+}

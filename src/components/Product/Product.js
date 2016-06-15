@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import numeral from 'numeral';
+
+import { QuantityPicker } from '../';
 
 import { add as addToCart } from '../../redux/modules/cart';
 import { add as addMessage } from '../../redux/modules/messages';
@@ -24,7 +27,8 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAdding: false
+      isAdding: false,
+      qty: 1
     };
   }
 
@@ -32,13 +36,26 @@ export default class extends Component {
     e.preventDefault();
     this.setState({isAdding: true});
 
-    this.props.addToCart(product, this.refs.qty.value).then(response => {
+    this.props.addToCart(product, this.state.qty).then(response => {
       this.props.addMessage('success', response.message);
-      this.setState({isAdding: false});
+      this.setState({
+        ...this.state,
+        isAdding: false
+      });
     }).catch(err => {
       console.log(err);
       this.props.addMessage('error', 'Ett fel inträffade. Försök igen senare.');
-      this.setState({isAdding: false});
+      this.setState({
+        ...this.state,
+        isAdding: false,
+      });
+    });
+  }
+
+  changeQty(qty) {
+    this.setState({
+      ...this.state,
+      qty: qty
     });
   }
 
@@ -48,17 +65,19 @@ export default class extends Component {
 
     return (
       <form className={style.block + (isAdding ? ' ' + style.adding : '')}>
-
-        <img src={data.thumbnail} style={{maxWidth: '100%'}} />
-        <strong>{data.name}</strong>
-        <br />
-        <br />
-        <span style={{color: 'red'}}>{numeral(data.price).format() + ' kr'}</span>
-        <br />
-        <br />
-        <input defaultValue="1" name="qty" ref="qty" />
-        <button onClick={this.addToCart.bind(this, data.id)}>Köp</button>
-
+        <div className={style.wrapper}>
+          <img src={data.thumbnail} style={{maxWidth: '100%'}} />
+          <Link to={'/product/' + data.id} className={style.name}>{data.name}</Link>
+          <br />
+          <br />
+          <span style={{color: 'red'}}>{numeral(data.price).format() + ' kr'}</span>
+          <br />
+          <br />
+        </div>
+        <div className={style.bottom}>
+          <QuantityPicker className={style.quantitypicker} onSet={this.changeQty.bind(this)} />
+          <button className={style.buy} onClick={this.addToCart.bind(this, data.id)}>Buy</button>
+        </div>
       </form>
     );
   }

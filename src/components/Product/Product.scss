@@ -3,7 +3,6 @@
 .block {
   background: #fff;
   border: 1px solid #ccc;
-  padding: 1.5em;
   display: inline-block;
   vertical-align: top;
   width: 230px;
@@ -13,8 +12,46 @@
   text-align: center;
   transition: opacity 0.3s transition("swift--in");
   opacity: 1;
+
+  min-height: 350px;
   
   &.adding {
     opacity: 0.3;
   }
+}
+
+.wrapper {
+  padding: 1.5em;
+}
+
+.name {
+  display: block;
+  margin-top: 0.7em;
+  text-align: center;
+  color: color("font");
+}
+
+.buy {
+  padding: 0 2.09em;
+  height: 25px;
+  background: color("primary");
+  color: #fff;
+  vertical-align: top;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  display: block;
+  float: right;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.quantitypicker {
+  display: block;
+  float: left;
 }
