@@ -9,6 +9,7 @@ import { QuantityPicker } from '../';
 import { add as addToCart } from '../../redux/modules/cart';
 import { add as addMessage } from '../../redux/modules/messages';
 
+
 const style = require('./Product.scss');
 
 numeral.languageData().delimiters.thousands = ' ';

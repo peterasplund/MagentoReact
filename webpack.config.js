@@ -1,14 +1,14 @@
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'source-map',
+  // devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
     './client/client.js',
     './src/styles/base.scss'
   ],
   output: {
-    path: require("path").resolve("./dist"), 
+    path: require("path").resolve('./dist'),
     filename: 'bundle.js',
     publicPath: '/'
   },
@@ -33,4 +33,4 @@ module.exports = {
       }
     ]
   }
-}
+};
