@@ -8,10 +8,12 @@ services:
       - mysql
     env_file:
       - env
+    environment:
+      - MYSQL_HOST=mysql
     volumes:
       - ./files/app/code/local/Crossroads/API:/var/www/htdocs/app/code/local/Crossroads/API
       - ./files/app/etc/modules/Crossroads_API.xml:/var/www/htdocs/app/etc/modules/Crossroads_API.xml
   mysql:
-    image: mysql:5.7
+    image: mysql
     env_file:
       - env
