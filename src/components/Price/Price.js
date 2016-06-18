@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
 import numeral from 'numeral';
 
-numeral.languageData().delimiters.thousands = ' ';
-numeral.languageData().delimiters.decimal = ',';
-
 const style = require('./Price.scss');
 
-const Price = ({ price, msrp, modifier, className }) => {
+const Price = ({ price, msrp, modifier, className, delimiters }) => {
+  numeral.languageData().delimiters.thousands = ' ';
+  numeral.languageData().delimiters.decimal = ',';
+  if (typeof delimiters !== 'undefined') {
+    numeral.languageData().delimiters = delimiters;
+  }
   const modifierClass = style['price_' + modifier];
   return (
     <div className={className}>
@@ -23,6 +25,7 @@ Price.propTypes = {
   msrp: PropTypes.number,
   modifier: PropTypes.string,
   className: PropTypes.string,
+  delimiters: PropTypes.object,
 };
 
 export default Price;
