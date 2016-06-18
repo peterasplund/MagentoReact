@@ -10,7 +10,7 @@ import { add as addToCart } from '../../redux/modules/cart';
 import { add as addMessage } from '../../redux/modules/messages';
 
 
-const style = require('./Product.scss');
+const style = require('./CatalogProduct.scss');
 
 numeral.languageData().delimiters.thousands = ' ';
 numeral.languageData().delimiters.decimal = ',';
@@ -76,13 +76,16 @@ export default class extends Component {
           <br />
           <br />
           <span style={{ color: 'red' }}>{`${numeral(data.price).format()} kr`}</span>
-          <br />
-          <br />
         </div>
-        <div className={style.bottom}>
-          <QuantityPicker className={style.quantitypicker} onSet={this.changeQty} />
-          <button className={style.buy} onClick={this.addToCart}>Buy</button>
-        </div>
+        {data.type_id !== 'simple' &&
+          <Link to={`/product/${data.id}`} className={style.name}>Read more</Link>
+        }
+        {data.type_id === 'simple' &&
+          <div className={style.bottom}>
+            <QuantityPicker className={style.quantitypicker} onSet={this.changeQty} />
+            <button className={style.buy} onClick={this.addToCart}>Buy</button>
+          </div>
+        }
       </form>
     );
   }

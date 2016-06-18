@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import { Product } from '../';
+import { CatalogProduct } from '../';
 
 const ProductList = ({ products }) =>
   <div>
-    {products.map((x, i)  => <Product key={i} data={x} />)}
+    {products.map((x, i)  => <CatalogProduct key={i} data={x} />)}
   </div>;
 
 ProductList.propTypes = {

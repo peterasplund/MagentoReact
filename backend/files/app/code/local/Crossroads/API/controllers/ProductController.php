@@ -14,6 +14,25 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
     try {
       $product = Mage::getModel('catalog/product')->load($id);
       $product->image = $product->getImageUrl();
+      $options = array();
+      $rawOptions = $product->getOptions();
+
+      foreach ($rawOptions as $option) {
+        $rawValues = $option->getValues();
+        $values = array();
+        foreach ($rawValues as $value) {
+          $values[] = $value->getData();
+        }
+        $options[] = array(
+          "title"   => $option->getTitle(),
+          "type"    => $option->getType(),
+          "require" => $option->getIsRequire(),
+          "values"  => $values
+        );
+      }
+
+      $product->options = $options;
+  
     } catch (Exception $e) {
       $this->_outputJson($this->_prepare_message_array(false, 'Product is missing.', null), true);
       die();  

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { ProductOptions } from '../../components';
+
 import { load } from '../../redux/modules/product';
 
 @connect(
@@ -29,6 +31,7 @@ export default class extends Component {
         <img alt={product.data.name} src={product.data.image} />
         <br />
         <p>{product.data.description}</p>
+        <ProductOptions options={product.data.options} />
       </div>
     );
   }

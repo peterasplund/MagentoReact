@@ -27,8 +27,8 @@ class Crossroads_API_Helper_Product extends Mage_Core_Helper_Abstract
 				$lastPageNumber = $collection->getLastPageNumber();
 			}
 			foreach ($collection as $product) {
-				//Don't fetch products out of stock
-				if (!$product->getData('is_in_stock') || $product->getData('is_salable') === "0") {
+
+				if ($product->getData('is_salable') === "0") {
 					continue;
 				}
 
@@ -51,23 +51,29 @@ class Crossroads_API_Helper_Product extends Mage_Core_Helper_Abstract
 		return $newCollection;
 	}
 
-	public function getCategory($categorySlug)
+	public function getCategory($categorySlug, $loadOutOfStock = true)
 	{
  		$category = Mage::getModel('catalog/category')->loadByAttribute('url_key', $categorySlug);
  		$collection = Mage::getResourceModel('catalog/product_collection');
  		$collection->addAttributeToSelect('*');
 
-		$collection->addAttributeToFilter('visibility', array(
-    				'neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
- 			->addCategoryFilter($category)
-			->joinField('is_in_stock',
-				'cataloginventory/stock_item',
-				'is_in_stock',
-				'product_id=entity_id',
-				'is_in_stock=1',
-				'{{table}}.stock_id=1',
-				'left')
-			->load();
+		$collection
+      ->addAttributeToFilter('visibility', array('neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
+      ->addCategoryFilter($category);
+
+      if (!$loadOutOfStock) { 
+        $collection->joinField('is_in_stock',
+          'cataloginventory/stock_item',
+          'is_in_stock',
+          'product_id=entity_id',
+          'is_in_stock=1',
+          '{{table}}.stock_id=1',
+          'left')
+        ->addAttributeToFilter('is_in_stock', "1");
+      }
+
+
+			$collection->load();
 
 		return $this->_prepareCollection($collection);
 	}
