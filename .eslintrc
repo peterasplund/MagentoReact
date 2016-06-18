@@ -11,6 +11,7 @@
       "import"
     ],
     "rules": {
+      "react/prefer-stateless-function": 0,
       "one-var": "off",
       "no-multi-spaces": "off",
       "no-console": "off",

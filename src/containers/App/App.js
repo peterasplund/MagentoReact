@@ -31,7 +31,7 @@ export default class extends Component {
     if (!this.props.categories.loaded) {
       return <div>Laddar...</div>;
     }
-    console.log(this.props.categories);
+
     return (
       <div className={style.block}>
         <div className={style.wrapper}>

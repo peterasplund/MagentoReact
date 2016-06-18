@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 const style = require('./ProductOptions.scss');
-console.log(style);
 
 export default class extends Component {
 
@@ -42,7 +41,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div>
+      <div className={style.block}>
         {this.renderOptions(this.props.options)}
       </div>
     );

@@ -1,0 +1,17 @@
+@import "../../styles/import";
+
+.image {
+  margin: .2em;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.2s transition("swift--in"),
+              border-color 0.2s transition("swift--in");
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.active {
+    border-color: color("primary");
+  }
+}

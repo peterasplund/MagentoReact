@@ -1,37 +1,92 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { autobind } from 'core-decorators';
 
-import { ProductOptions } from '../../components';
+import { ProductOptions, QuantityPicker } from '../../components';
+import { Media } from '../';
 
 import { load } from '../../redux/modules/product';
+import { add as addToCart } from '../../redux/modules/cart';
+import { add as addMessage } from '../../redux/modules/messages';
+
+const style = require('./Product.scss');
 
 @connect(
-  state => ({ product: state.product }), { load }
+  state => ({ product: state.product }), { load, addToCart, addMessage }
 )
 export default class extends Component {
 
   static propTypes = {
     product: React.PropTypes.object,
+    params: React.PropTypes.object,
     load: React.PropTypes.func,
-    params: React.PropTypes.object
+    addToCart: React.PropTypes.func,
+    addMessage: React.PropTypes.func
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAdding: false,
+      qty: 1
+    };
   }
 
   componentWillMount() {
     this.props.load(this.props.params.id);
   }
 
+  @autobind
+  addToCart(e) {
+    e.preventDefault();
+    const { product } = this.props;
+    this.setState({ isAdding: true });
+
+    this.props.addToCart(product.data.entity_id, this.state.qty).then(response => {
+      this.props.addMessage('success', response.message);
+      this.setState({
+        ...this.state,
+        isAdding: false
+      });
+    }).catch(err => {
+      console.log(err);
+      this.props.addMessage('error', 'Ett fel inträffade. Försök igen senare.');
+      this.setState({
+        ...this.state,
+        isAdding: false,
+      });
+    });
+  }
+
+  @autobind
+  changeQty(qty) {
+    this.setState({
+      ...this.state,
+      qty
+    });
+  }
+
   render() {
     const { product } = this.props;
-    if (product.loading) {
+    if (product.loading || !product.loaded) {
       return <div>Laddar</div>;
     }
+
     return (
       <div>
-        <h1>{product.data.name}</h1>
-        <img alt={product.data.name} src={product.data.image} />
-        <br />
-        <p>{product.data.description}</p>
-        <ProductOptions options={product.data.options} />
+        <div className={style.left}>
+          <h1>{product.data.name}</h1>
+          <br />
+          <p className={style.description}>{product.data.description}</p>
+          <ProductOptions options={product.data.options} />
+          <div>
+            <QuantityPicker className={style.quantitypicker} onSet={this.changeQty} />
+            <button className={style.buy} onClick={this.addToCart}>Buy</button>
+          </div>
+        </div>
+        <div className={style.right}>
+          <Media image={product.data.image} gallery={product.data.media_gallery} />
+        </div>
       </div>
     );
   }

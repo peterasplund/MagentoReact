@@ -1,0 +1,35 @@
+@import "../../styles/import";
+
+$gutter: .8em;
+
+.description {
+  margin: 0 0 3em 0;
+}
+
+.quantitypicker {
+
+}
+
+.buy {
+  padding: 0 2.09em;
+  height: 25px;
+  background: color("primary");
+  color: #fff;
+  vertical-align: top;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+
+.left {
+  width: 50%;
+  float: left;
+
+  padding-right: $gutter;
+}
+.right {
+  width: 50%;
+  float: right;
+
+  padding-left: $gutter;
+}

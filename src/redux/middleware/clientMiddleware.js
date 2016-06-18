@@ -8,24 +8,14 @@ export default function clientMiddleware(client) {
     if (!promise) {
       return next(action);
     }
-
+    
     const [REQUEST, SUCCESS, FAILURE] = types;
     next({ ...rest, type: REQUEST });
 
     const actionPromise = promise(client);
     actionPromise.then(
       (result) => next({ ...rest, result, type: SUCCESS }),
-      (error) => {
-        const route = getState().routing.locationBeforeTransitions.pathname;
-
-        if (error.message === 'Token not found' && route !== '/login' && route !== '/') {
-          if (typeof location !== 'undefined') {
-            location.reload();
-          }
-        }
-
-        return next({ ...rest, error, type: FAILURE });
-      }
+      (error) => next({ ...rest, error, type: FAILURE })
     ).catch((error) => {
       console.error('MIDDLEWARE ERROR:', error);
       next({ ...rest, error, type: FAILURE });

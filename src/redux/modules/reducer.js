@@ -5,6 +5,7 @@ import cart from './cart';
 import category from './category';
 import categories from './categories';
 import product from './product';
+import media from './media';
 
 export default combineReducers({
   routing: routerReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   cart,
   categories,
   category,
-  product
+  product,
+  media
 });
