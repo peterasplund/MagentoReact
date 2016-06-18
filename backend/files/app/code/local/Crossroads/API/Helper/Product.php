@@ -41,7 +41,10 @@ class Crossroads_API_Helper_Product extends Mage_Core_Helper_Abstract
 				$data = $product->getData();
 				$thumbnail = Mage::helper('catalog/image')->init($product, 'small_image')->resize(285);
 
-				$data["id"] = $product->getId();
+        $data["id"] = $product->getId();
+
+        // finalPrice is too slow. Maybe we need to index it.
+				// $data["finalPrice"] = $product->getFinalPrice();
 				$data["thumbnail"] = (string)$thumbnail;
 
 				$newCollection[] = $data;

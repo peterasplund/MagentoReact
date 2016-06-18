@@ -58,6 +58,9 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
       $product->image = (string)$this->imageHelper->init($product, 'image')->resize(IMAGE_SIZE);
       $product->options = $this->prepareOptions($product);
       $product->media_gallery = $this->prepareMediaGallery($product);
+
+      // finalPrice is too slow. Maybe we need to index it.
+      // $product->finalPrice = $product->getFinalPrice();
   
     } catch (Exception $e) {
       $this->_outputJson($this->_prepare_message_array(false, 'Product is missing.', null), true);

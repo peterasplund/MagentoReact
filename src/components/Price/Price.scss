@@ -1,0 +1,23 @@
+@import "../../styles/import";
+
+.block {
+
+}
+.price {
+  display: block;
+  color: color("negative");
+
+  &_large {
+    font-size: 2em;
+  }
+}
+
+.msrp {
+  display: block;
+  color: font("color--muted");
+  text-decoration: line-through;
+
+  &_large {
+    font-size: 2em;
+  }
+}

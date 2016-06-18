@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import numeral from 'numeral';
 import { autobind } from 'core-decorators';
 
-import { QuantityPicker } from '../';
+import { QuantityPicker, Price } from '../';
 
 import { add as addToCart } from '../../redux/modules/cart';
 import { add as addMessage } from '../../redux/modules/messages';
 
-
 const style = require('./CatalogProduct.scss');
-
-numeral.languageData().delimiters.thousands = ' ';
-numeral.languageData().delimiters.decimal = ',';
 
 @connect(
   null, { addToCart, addMessage }
@@ -75,7 +70,7 @@ export default class extends Component {
           <Link to={`/product/${data.id}`} className={style.name}>{data.name}</Link>
           <br />
           <br />
-          <span style={{ color: 'red' }}>{`${numeral(data.price).format()} kr`}</span>
+          <Price price={parseFloat(data.price, 10)} msrp={parseFloat(data.msrp, 10)} />
         </div>
         {data.type_id !== 'simple' &&
           <Link to={`/product/${data.id}`} className={style.name}>Read more</Link>
