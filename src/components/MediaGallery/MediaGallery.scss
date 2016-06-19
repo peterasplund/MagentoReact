@@ -7,6 +7,12 @@
   transition: opacity 0.2s transition("swift--in"),
               border-color 0.2s transition("swift--in");
 
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+
   &:hover {
     opacity: 0.8;
   }

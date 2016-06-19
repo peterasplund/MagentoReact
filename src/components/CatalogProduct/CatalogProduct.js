@@ -73,7 +73,9 @@ export default class extends Component {
           <Price price={parseFloat(data.price, 10)} msrp={parseFloat(data.msrp, 10)} />
         </div>
         {data.type_id !== 'simple' &&
-          <Link to={`/product/${data.id}`} className={style.name}>Read more</Link>
+          <div className={style.bottom}>
+            <Link className={style.readmore} to={`/product/${data.id}`}>Read more</Link>
+          </div>
         }
         {data.type_id === 'simple' &&
           <div className={style.bottom}>

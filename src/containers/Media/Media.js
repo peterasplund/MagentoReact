@@ -18,6 +18,10 @@ export default class extends Component {
     selectImage: React.PropTypes.func,
   }
 
+  componentWillMount() {
+    this.props.selectImage(null);
+  }
+
   render() {
     return (
       <div className={style.block}>

@@ -47,6 +47,19 @@
   display: block;
   float: right;
 }
+.readmore {
+  padding: 0 2.09em;
+  height: 25px;
+  background: color("secondary");
+  line-height: 1.7em;
+  font-weight: 400;
+  color: #fff;
+  vertical-align: top;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  display: block;
+}
 
 .bottom {
   position: absolute;
