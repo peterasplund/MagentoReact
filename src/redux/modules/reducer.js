@@ -6,6 +6,7 @@ import category from './category';
 import categories from './categories';
 import product from './product';
 import media from './media';
+import cmspage from './cmspage';
 
 export default combineReducers({
   routing: routerReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   categories,
   category,
   product,
-  media
+  media,
+  cmspage
 });

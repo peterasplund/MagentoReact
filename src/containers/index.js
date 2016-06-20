@@ -1,4 +1,5 @@
 export App from './App/App';
+export CMSPage from './CMSPage/CMSPage';
 export Messages from './Messages/Messages';
 export Home from './Home/Home';
 export Category from './Category/Category';

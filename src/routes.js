@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import { App, Home, Category, Checkout, Product } from './containers';
+import { App, Home, Category, Checkout, Product, CMSPage, PageNotFound } from './containers';
 
 export default () =>
   <Route path="/" component={App}>
@@ -9,4 +9,6 @@ export default () =>
     <Route path="category/:slug" component={Category} />
     <Route path="product/:id" component={Product} />
     <Route path="checkout" component={Checkout} />
+    <Route path="cms/:slug" component={CMSPage} />
+    <Route path="*" component={PageNotFound} status="404" />
   </Route>;
