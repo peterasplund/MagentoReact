@@ -36,6 +36,7 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
   }
 
   // @todo: maybe check if image is disabled and stuff. Hopefully Magento takes care of this though.
+  // Should also return an array of images which should be loaded as a srcset in Components/Media.
   private function prepareMediaGallery($product) {
     $gallery = array();
     $rawGallery = $product->getMediaGalleryImages();
@@ -61,10 +62,10 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
 
       // finalPrice is too slow. Maybe we need to index it.
       // $product->finalPrice = $product->getFinalPrice();
-  
+
     } catch (Exception $e) {
       $this->_outputJson($this->_prepare_message_array(false, 'Product is missing.', null), true);
-      die();  
+      die();
     }
 
     // @todo: prepare product data and filter unnecessary stuff.
