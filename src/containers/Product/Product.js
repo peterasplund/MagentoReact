@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 
-import { ProductOptions, QuantityPicker, Price } from '../../components';
+import { ProductOptions, QuantityPicker, Price, Brand } from '../../components';
 import { Media } from '../';
 
 import { load } from '../../redux/modules/product';
@@ -76,6 +76,7 @@ export default class extends Component {
       <div>
         <div className={style.left}>
           <h1>{product.data.name}</h1>
+          <h2>{product.data.manufacturer.name}</h2>
           <br />
           <p className={style.description}>{product.data.description}</p>
           <ProductOptions options={product.data.options} />

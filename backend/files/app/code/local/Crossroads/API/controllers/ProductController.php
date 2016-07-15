@@ -59,6 +59,9 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
       $product->image = (string)$this->imageHelper->init($product, 'image')->resize(IMAGE_SIZE);
       $product->options = $this->prepareOptions($product);
       $product->media_gallery = $this->prepareMediaGallery($product);
+      $manufacturerKey = array( 'name', 'id' );
+      $manufacturerValue = array( $product->getAttributeText('manufacturer'), $product->manufacturer );
+      $product->manufacturer = array_combine( $manufacturerKey, $manufacturerValue ); // Make manufacturer return text instead of id
 
       // finalPrice is too slow. Maybe we need to index it.
       // $product->finalPrice = $product->getFinalPrice();
