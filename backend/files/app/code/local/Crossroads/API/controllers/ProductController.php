@@ -10,7 +10,9 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
 
   public function _construct() {
     define('THUMBNAIL_SIZE', 70);
+    define('THUMBNAIL_SIZE2x', 140);
     define('IMAGE_SIZE', 600);
+    define('IMAGE_SIZE2x', 1200);
 
     $this->imageHelper = Mage::helper('catalog/image');
   }
@@ -43,8 +45,8 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
 
     foreach ($rawGallery as $image) {
       $gallery[] = array(
-        "thumbnail" => (string)$this->imageHelper->init($product, 'image', $image->getFile())->resize(THUMBNAIL_SIZE),
-        "image"     => (string)$this->imageHelper->init($product, 'image', $image->getFile())->resize(IMAGE_SIZE)
+        "thumbnail" => array( (string)$this->imageHelper->init($product, 'image', $image->getFile())->resize(THUMBNAIL_SIZE), (string)$this->imageHelper->init($product, 'image', $image->getFile())->resize(THUMBNAIL_SIZE2x) ),
+        "image"     => array( (string)$this->imageHelper->init($product, 'image', $image->getFile())->resize(IMAGE_SIZE), (string)$this->imageHelper->init($product, 'image', $image->getFile())->resize(IMAGE_SIZE2x) )
       );
     }
 
@@ -56,7 +58,7 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
     $id = $this->getRequest()->getParam('id');
     try {
       $product = Mage::getModel('catalog/product')->load($id);
-      $product->image = (string)$this->imageHelper->init($product, 'image')->resize(IMAGE_SIZE);
+      $product->image = array( (string)$this->imageHelper->init($product, 'image')->resize(IMAGE_SIZE), (string)$this->imageHelper->init($product, 'image')->resize(IMAGE_SIZE2x) );
       $product->options = $this->prepareOptions($product);
       $product->media_gallery = $this->prepareMediaGallery($product);
       $manufacturerKey = array( 'name', 'id' );
