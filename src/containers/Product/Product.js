@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 
-import { ProductOptions, QuantityPicker, Price, Brand } from '../../components';
+import { ProductOptions, QuantityPicker, Price } from '../../components';
 import { Media } from '../';
 
 import { load } from '../../redux/modules/product';
