@@ -66,6 +66,13 @@ export default class extends Component {
     });
   }
 
+  renderManufacturer(manufacturer) {
+    if (!manufacturer.name) {
+      return <span />;
+    }
+    return <h2>{manufacturer.name}</h2>;
+  }
+
   render() {
     const { product } = this.props;
     if (product.loading || !product.loaded) {
@@ -76,7 +83,7 @@ export default class extends Component {
       <div>
         <div className={style.left}>
           <h1>{product.data.name}</h1>
-          <br />
+          {this.renderManufacturer(product.data.manufacturer)}
           <p className={style.description}>{product.data.description}</p>
           <ProductOptions options={product.data.options} />
           <div>
