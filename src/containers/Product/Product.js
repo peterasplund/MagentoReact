@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 
-import { ProductOptions, QuantityPicker, Price, Brand } from '../../components';
+import { ProductOptions, QuantityPicker, Price } from '../../components';
 import { Media } from '../';
 
 import { load } from '../../redux/modules/product';
@@ -66,6 +66,13 @@ export default class extends Component {
     });
   }
 
+  renderManufacturer(manufacturer) {
+    if (!manufacturer.name) {
+      return <span />;
+    }
+    return <h2>{manufacturer.name}</h2>;
+  }
+
   render() {
     const { product } = this.props;
     if (product.loading || !product.loaded) {
@@ -76,8 +83,7 @@ export default class extends Component {
       <div>
         <div className={style.left}>
           <h1>{product.data.name}</h1>
-          <h2>{product.data.manufacturer.name}</h2>
-          <br />
+          {this.renderManufacturer(product.data.manufacturer)}
           <p className={style.description}>{product.data.description}</p>
           <ProductOptions options={product.data.options} />
           <div>
