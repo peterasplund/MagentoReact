@@ -11,8 +11,12 @@ services:
     environment:
       - MYSQL_HOST=mysql
     volumes:
+      # Maybe use change this to use a glob pattern
       - ./files/app/code/local/Crossroads/API:/var/www/htdocs/app/code/local/Crossroads/API
       - ./files/app/etc/modules/Crossroads_API.xml:/var/www/htdocs/app/etc/modules/Crossroads_API.xml
+
+      - ./files/app/code/local/Crossroads/API:/var/www/htdocs/app/code/local/Crossroads/BundleItems
+      - ./files/app/etc/modules/Crossroads_API.xml:/var/www/htdocs/app/etc/modules/Crossroads_BundleItems.xml
   mysql:
     image: mysql
     env_file:

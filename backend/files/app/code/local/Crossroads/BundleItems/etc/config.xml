@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+
+  <modules>
+	   <Crossroads_BundleItems>
+       <version>1.0.0</version>
+     </Crossroads_BundleItems>
+	</modules>
+
+	<frontend>
+    <layout>
+      <updates>
+        <bundleitems>
+          <file>bundleitems.xml</file>
+        </bundleitems>
+      </updates>
+    </layout>
+	</frontend>
+
+  <global>
+    
+    <catalog>
+      <product>
+        <options>
+          <bundle>
+            <types>
+              <hidden translate="label" module="bundle">
+                <label>Hidden</label>
+              </hidden>
+            </types>
+          </bundle>
+        </options>
+      </product>
+    </catalog>
+
+		<helpers>
+	    <bundle>
+        <rewrite>
+          <catalog_product_configuration>Crossroads_BundleItems_Helper_Catalog_Product_Configuration</catalog_product_configuration>
+        </rewrite>
+	    </bundle>
+		</helpers>
+
+	</global>
+</config>
