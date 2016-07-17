@@ -51,6 +51,26 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
     return $gallery;
   }
 
+  private function prepareRelatedProducts($product) {
+
+    $relatedProductsCollection = $product->getRelatedProductCollection()
+        ->addAttributeToSelect('*')
+        ->setPositionOrder()
+        ->addStoreFilter(Mage::app()->getStore()->getStoreId());
+
+    $relatedProducts = array();
+    foreach ($relatedProductsCollection as $relatedProduct) {
+      $relatedProduct->setThumbnail((string)Mage::helper('catalog/image')->init($relatedProduct, 'small_image')->resize(285));
+
+      $relatedProductData = $relatedProduct->getData();
+
+      $relatedProductData['id'] = $relatedProduct->getData('entity_id');
+
+      $relatedProducts[] = $relatedProductData;
+    }
+    return $relatedProducts;
+  }
+
   public function getAction()
   {
     $id = $this->getRequest()->getParam('id');
@@ -63,6 +83,8 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
       $manufacturerValue = array( $product->getAttributeText('manufacturer'), $product->manufacturer );
       $product->manufacturer = array_combine( $manufacturerKey, $manufacturerValue ); // Make manufacturer return text instead of id
 
+      $product->setRelatedProducts($this->prepareRelatedProducts($product));
+
       // finalPrice is too slow. Maybe we need to index it.
       // $product->finalPrice = $product->getFinalPrice();
 
@@ -73,7 +95,6 @@ class Crossroads_API_ProductController extends Crossroads_API_Controller_Super
 
     // @todo: prepare product data and filter unnecessary stuff.
     echo $this->_outputJson($product->getData());
-
   }
 
 }

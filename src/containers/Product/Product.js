@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 
-import { ProductOptions, QuantityPicker, Price } from '../../components';
+import { ProductOptions, QuantityPicker, Price, ProductList } from '../../components';
 import { Media } from '../';
 
 import { load } from '../../redux/modules/product';
@@ -73,6 +73,18 @@ export default class extends Component {
     return <h2>{manufacturer.name}</h2>;
   }
 
+  renderRelatedProducts(relatedProducts) {
+    if (!relatedProducts.length) {
+      return <span />;
+    }
+    return (
+      <div>
+        <h2>Related products</h2>
+        <ProductList products={relatedProducts} />
+      </div>
+    );
+  }
+
   render() {
     const { product } = this.props;
     if (product.loading || !product.loaded) {
@@ -81,20 +93,23 @@ export default class extends Component {
 
     return (
       <div>
-        <div className={style.left}>
-          <h1>{product.data.name}</h1>
-          {this.renderManufacturer(product.data.manufacturer)}
-          <p className={style.description}>{product.data.description}</p>
-          <ProductOptions options={product.data.options} />
-          <div>
-            <Price className={style.price} price={parseFloat(product.data.price, 10)} msrp={parseFloat(product.data.msrp, 10)} modifier="large" />
-            <QuantityPicker className={style.quantitypicker} onSet={this.changeQty} />
-            <button className={style.buy} onClick={this.addToCart}>Buy</button>
+        <div className="cf">
+          <div className={style.left}>
+            <h1>{product.data.name}</h1>
+            {this.renderManufacturer(product.data.manufacturer)}
+            <p className={style.description}>{product.data.description}</p>
+            <ProductOptions options={product.data.options} />
+            <div>
+              <Price className={style.price} price={parseFloat(product.data.price, 10)} msrp={parseFloat(product.data.msrp, 10)} modifier="large" />
+              <QuantityPicker className={style.quantitypicker} onSet={this.changeQty} />
+              <button className={style.buy} onClick={this.addToCart}>Buy</button>
+            </div>
+          </div>
+          <div className={style.right}>
+            <Media image={product.data.image} gallery={product.data.media_gallery} />
           </div>
         </div>
-        <div className={style.right}>
-          <Media image={product.data.image} gallery={product.data.media_gallery} />
-        </div>
+        {this.renderRelatedProducts(product.data.related_products)}
       </div>
     );
   }
