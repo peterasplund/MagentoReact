@@ -20,3 +20,7 @@ React+Redux based front-end for Magento
 
 * Use `docker exec -it backend_web_1 /bin/bash` to run the shell for the web server
 * Use `docker exec -it backend_mysql_1 /bin/bash` to run the shell for the mysql server
+
+## Discussion
+
+Join the @magentoreact slack group
