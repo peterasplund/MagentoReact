@@ -19,5 +19,7 @@ services:
       - ./files/app/etc/modules/Crossroads_API.xml:/var/www/htdocs/app/etc/modules/Crossroads_BundleItems.xml
   mysql:
     image: mysql
+    ports: 
+      - "3306:3306"
     env_file:
       - env
