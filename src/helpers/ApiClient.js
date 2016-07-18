@@ -4,7 +4,7 @@ import superagent from 'superagent';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 // const apiHost = __DEVELOPMENT__ ? config.apiHost.local : config.apiHost.live;
-const apiHost = 'http://local.magento/';
+const apiHost = 'http://magento.local';
 
 function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? `/${path}` : path;
