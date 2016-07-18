@@ -6,10 +6,11 @@ React+Redux based front-end for Magento
 ### Setup backend
 1. If not installed, install docker, docker-compose (Windows and OSX users also have to install docker-machine)
 2. Run `docker-machine ip` and add an entry in "/ect/hosts" with "local.magento" as the hostname.
-3. cd into `backend` and run `docker-compose up -d`.
-4. Run `docker exec -it backend_web_1 install-sampledata` to install the sample data.
-5. Run `docker exec -it backend_web_1 install-magento` to automatically install Magento.
-6. Visit http://magento.local/ and make sure it's working.
+3. Run `eval $(docker-machine env)` to configure your shell
+4. cd into `backend` and run `docker-compose up -d`.
+5. Run `docker exec -it backend_web_1 install-sampledata` to install the sample data.
+6. Run `docker exec -it backend_web_1 install-magento` to automatically install Magento.
+7. Visit http://magento.local/ and make sure it's working.
 
 ### Setup frontend
 1. Run `npm install` in the root folder.
