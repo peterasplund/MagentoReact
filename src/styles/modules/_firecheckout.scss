@@ -33,9 +33,9 @@
 
 .#{$block} {
   &-window {
-    @extend %flex;
-    @extend %flex-direction-column;
-    @extend %justify-content-center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: size("gutter") gr(-1);
     max-width: breakpoints("tiny");
     width: 100% !important;
@@ -46,10 +46,6 @@
     right:  0 !important;
     left:   0 !important;
     margin: 0 auto !important;
-
-    // @include mq("tiny", max-width) {
-    //   width: auto !important;
-    // }
 
     .no-flexbox & {
       @extend %momentum-scroll;

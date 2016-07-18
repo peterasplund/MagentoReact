@@ -48,9 +48,9 @@ html {
 }
 
 body {
-  @extend %flex;
-  @extend %flex-direction-column;
   @extend %font-smoothing;
+  display: flex;
+  flex-direction: column;
   background: color("background");
   min-height: 100%;
   overflow-y: scroll; /* [4] */

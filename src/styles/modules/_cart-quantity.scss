@@ -19,7 +19,7 @@
 
 
 .#{$block} {
-  @extend %flex;
+  display: flex;
   white-space: nowrap;
 
   &__value {
