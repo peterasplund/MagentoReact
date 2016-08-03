@@ -15,11 +15,11 @@ services:
       - ./files/app/code/local/Crossroads/API:/var/www/htdocs/app/code/local/Crossroads/API
       - ./files/app/etc/modules/Crossroads_API.xml:/var/www/htdocs/app/etc/modules/Crossroads_API.xml
 
-      - ./files/app/code/local/Crossroads/API:/var/www/htdocs/app/code/local/Crossroads/BundleItems
-      - ./files/app/etc/modules/Crossroads_API.xml:/var/www/htdocs/app/etc/modules/Crossroads_BundleItems.xml
+      - ./files/app/code/local/Crossroads/BundleItems:/var/www/htdocs/app/code/local/Crossroads/BundleItems
+      - ./files/app/etc/modules/Crossroads_BundleItems.xml:/var/www/htdocs/app/etc/modules/Crossroads_BundleItems.xml
   mysql:
     image: mysql
-    ports: 
+    ports:
       - "3306:3306"
     env_file:
       - env
