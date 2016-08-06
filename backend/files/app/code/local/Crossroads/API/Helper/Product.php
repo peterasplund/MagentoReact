@@ -64,7 +64,7 @@ class Crossroads_API_Helper_Product extends Mage_Core_Helper_Abstract
       ->addAttributeToFilter('visibility', array('neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
       ->addCategoryFilter($category);
 
-      if (!$loadOutOfStock) { 
+      if (!$loadOutOfStock) {
         $collection->joinField('is_in_stock',
           'cataloginventory/stock_item',
           'is_in_stock',
@@ -81,5 +81,29 @@ class Crossroads_API_Helper_Product extends Mage_Core_Helper_Abstract
 		return $this->_prepareCollection($collection);
 	}
 
+	public function getProductsByAttributeValue($attributeCode, $optionId, $loadOutOfStock = true)
+	{
+		$collection = Mage::getResourceModel('catalog/product_collection');
+ 		$collection->addAttributeToSelect('*');
+		$collection
+      ->addAttributeToFilter('visibility', array('neq' => Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE))
+      ->addAttributeToFilter($attributeCode, $optionId);
+
+      if (!$loadOutOfStock) {
+        $collection->joinField('is_in_stock',
+          'cataloginventory/stock_item',
+          'is_in_stock',
+          'product_id=entity_id',
+          'is_in_stock=1',
+          '{{table}}.stock_id=1',
+          'left')
+        ->addAttributeToFilter('is_in_stock', "1");
+      }
+
+
+			$collection->load();
+
+		return $this->_prepareCollection($collection);
+	}
 
 }

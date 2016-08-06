@@ -7,3 +7,4 @@ export Product from './Product/Product';
 export Checkout from './Checkout/Checkout';
 export Media from './Media/Media';
 export Cart from './Cart/Cart';
+export AttributeCollection from './AttributeCollection/AttributeCollection';

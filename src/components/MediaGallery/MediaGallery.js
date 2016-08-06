@@ -12,7 +12,7 @@ export default class extends Component {
   render() {
     return (
       <div>
-        {this.props.images.map((image, i) => <img key={i} className={style.image + (this.props.selected === image.image ? ` ${style.active}`  : '')} src={image.thumbnail} onClick={this.props.selectImage.bind(this, image.image)} alt={image} />)}
+        {this.props.images.map((image, i) => <img key={i} className={style.image + (this.props.selected === image.image ? ` ${style.active}`  : '')} src={image.thumbnail[0]} onClick={this.props.selectImage.bind(this, image.image[1])} alt={image} />)}
       </div>
     );
   }

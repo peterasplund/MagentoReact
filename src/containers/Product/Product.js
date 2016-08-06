@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 
-import { ProductOptions, QuantityPicker, Price, ProductList } from '../../components';
+import { LoadingIcon, ProductOptions, QuantityPicker, Price, ProductList } from '../../components';
 import { Media } from '../';
 
 import { load } from '../../redux/modules/product';
@@ -88,7 +88,7 @@ export default class extends Component {
   render() {
     const { product } = this.props;
     if (product.loading || !product.loaded) {
-      return <div>Laddar</div>;
+      return <LoadingIcon />;
     }
 
     return (

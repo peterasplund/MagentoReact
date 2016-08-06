@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { ProductList } from '../../components/';
+import { LoadingIcon, ProductList } from '../../components/';
 import { load } from '../../redux/modules/category';
 
 @connect(
@@ -28,7 +28,7 @@ export default class extends Component {
   render() {
     const { category } = this.props;
     if (category.loading) {
-      return <div>Laddar</div>;
+      return <LoadingIcon />;
     }
     return (
       <div>

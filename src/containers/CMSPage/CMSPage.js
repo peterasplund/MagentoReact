@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { LoadingIcon } from '../../components';
+
 import { load } from '../../redux/modules/cmspage';
 
 @connect(
@@ -32,7 +34,7 @@ export default class extends Component {
   render() {
     const { cmspage } = this.props;
     if (cmspage.loading || !cmspage.loaded) {
-      return <div>Laddar</div>;
+      return <LoadingIcon />;
     }
 
     return (

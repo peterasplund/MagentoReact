@@ -5,3 +5,4 @@ export MediaGallery from './MediaGallery/MediaGallery';
 export ProductOptions from './ProductOptions/ProductOptions';
 export CatalogProduct from './CatalogProduct/CatalogProduct';
 export ProductList from './ProductList/ProductList';
+export LoadingIcon from './LoadingIcon/LoadingIcon';
