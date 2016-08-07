@@ -12,7 +12,7 @@ const Price = ({ price, msrp, modifier, className, delimiters }) => {
   const modifierClass = style['price_' + modifier];
   return (
     <div className={className}>
-      {!isNaN(msrp) &&
+      {!isNaN(msrp) && price !== msrp &&
         <span className={style.msrp + ' ' + modifierClass}>{`${numeral(msrp).format()} kr`}</span>
       }
       <span className={style.price + ' ' + modifierClass}>{`${numeral(price).format()} kr`}</span>
