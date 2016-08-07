@@ -54,8 +54,8 @@ export default class extends Component {
       return <div />;
     }
     return (
-      <div className={style.block}>
-        <span className={style.heading} onClick={this.props.toggle}>Cart ({cart.data.summary.qty})</span>
+      <div className={style.block} onClick={this.props.toggle}>
+        <span className={style.heading}>Cart ({cart.data.summary.qty})</span>
         {(cart.open) ? this.renderBody(cart.data.items) : <div />}
       </div>
     );

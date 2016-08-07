@@ -8,16 +8,14 @@
   color: #fff;
   cursor: pointer;
   font-weight: bold;
-  border-left: 1px solid #666;
-  padding-left: 1.7em;
 }
 
 .body {
-  position: absolute;
   background: #fff;
+  color: #000;
   padding: 1em 2em .5em 2em;
-  width: 250px;
-  top: 2em;
+  width: 15em;
+  line-height: normal;
   right: 0;
   border: 1px solid #ccc;
   z-index: z("popup");

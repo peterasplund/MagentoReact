@@ -42,7 +42,6 @@ export default class extends Component {
 
     return (
       <div className={style.block}>
-        <LoadingIcon />
         <div className={style.wrapper}>
           <Link className={style.logo_link} to="/">
             <div className={style.logo} dangerouslySetInnerHTML={{ __html: logo }} />
