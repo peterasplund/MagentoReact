@@ -97,7 +97,7 @@ export default class extends Component {
           <div className={style.left}>
             <h1>{product.data.name}</h1>
             {this.renderManufacturer(product.data.manufacturer)}
-            <p className={style.description}>{product.data.description}</p>
+            <p className={style.description} dangerouslySetInnerHTML={{ __html: product.data.description }} />
             <ProductOptions options={product.data.options} />
             <div>
               <Price className={style.price} price={parseFloat(product.data.price, 10)} msrp={parseFloat(product.data.msrp, 10)} modifier="large" />
